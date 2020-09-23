@@ -1,3 +1,7 @@
+import 'package:cubos_test/app/core/errors/exceptions/cache_exception.dart';
+import 'package:cubos_test/app/core/errors/exceptions/server_exception.dart';
+import 'package:cubos_test/app/core/errors/failures/cache_failure.dart';
+import 'package:cubos_test/app/core/errors/failures/server_failure.dart';
 import 'package:cubos_test/app/core/network/network_info.dart';
 import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_local_datasource/discover_movies_local_datasource.dart';
 import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_remote_datasource/discover_movies_remote_datasource.dart';
@@ -22,7 +26,20 @@ class DiscoverMoviesRepositoryImplementation implements DiscoverMoviesRepository
   @override
   Future<Either<Failure, DiscoverMoviesApiResponse>> getMoviesList(int genreId, int pageNumber) async {
     if(await networkInfo.isConnected){
-
+      try {
+        DiscoverMoviesApiResponse discoverMoviesApiResponse = await remoteDataSource.getMoviesList(genreId, pageNumber);
+        return Right(discoverMoviesApiResponse);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        DiscoverMoviesApiResponse discoverMoviesApiResponse = await localDataSource.getMoviesList(genreId, pageNumber);
+        //TODO: Check for the first call
+        return Right(discoverMoviesApiResponse);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
     }
   }
 
