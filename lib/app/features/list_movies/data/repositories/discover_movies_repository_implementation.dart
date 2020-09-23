@@ -5,6 +5,17 @@ import 'package:dartz/dartz.dart';
 
 class DiscoverMoviesRepositoryImplementation implements DiscoverMoviesRepository {
   
+  final DiscoverMoviesRemoteDataSource remoteDataSource;
+  final DiscoverMoviesLocalDataSource localDataSource;
+  final NetworkInfo networkInfo;
+
+  DiscoverMoviesRepositoryImplementation(
+    {
+      this.remoteDataSource,
+      this.localDataSource,
+      this.networkInfo
+    });
+
   @override
   Future<Either<Failure, DiscoverMoviesApiResponse>> getMoviesList(int genreId, int pageNumber) {
     // TODO: implement getMoviesList
