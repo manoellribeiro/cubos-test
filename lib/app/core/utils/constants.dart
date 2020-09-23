@@ -1,4 +1,5 @@
 const THE_MOVIE_DB_BASE_URL = 'https://api.themoviedb.org/3/';
+const THE_MOVIE_DB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 const API_KEY = 'cbc0416a39448ac090408129af32203f';
 const ACTION_GENRE_ID = 28;
 const ADVENTURE_GENRE_ID = 12;
