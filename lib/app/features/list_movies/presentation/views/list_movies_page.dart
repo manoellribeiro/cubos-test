@@ -43,10 +43,17 @@ class _ListMoviesPageState extends State<ListMoviesPage> {
             left: 0,
             child: Container(
               decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(0, 20),
+                    blurRadius: 30
+                  )
+                ],
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.white, Colors.white.withOpacity(0.5)]
+                  colors: [Colors.white, Colors.white.withOpacity(0.1)]
                 ),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(20),
@@ -92,7 +99,6 @@ class _ListMoviesPageState extends State<ListMoviesPage> {
                           genreName: "Comédia",
                         ),
                       ],),
-                      SizedBox(height: SizeConfig.heightMultiplier * 5)
                   ],
                 ),
               )
