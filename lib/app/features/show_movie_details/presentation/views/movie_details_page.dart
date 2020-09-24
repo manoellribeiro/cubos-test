@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class MovieDetailsPage extends StatefulWidget {
+
+  final Map<String, dynamic> arguments;
+
+  const MovieDetailsPage({Key key, this.arguments}) : super(key: key);
+
   @override
   _MovieDetailsPageState createState() => _MovieDetailsPageState();
 }

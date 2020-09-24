@@ -1,4 +1,5 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:cubos_test/app/features/show_movie_details/presentation/views/movie_details_page.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -55,6 +56,7 @@ class AppModule extends MainModule {
   @override
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, child: (_, args) => ListMoviesPage()),
+        ModularRouter('/showDetails', child: (_, args) => MovieDetailsPage(arguments: args.data)),
       ];
 
   @override
