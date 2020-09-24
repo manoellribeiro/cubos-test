@@ -30,7 +30,7 @@ class DiscoverMoviesRepositoryImplementation implements DiscoverMoviesRepository
         DiscoverMoviesApiResponse discoverMoviesApiResponse = await remoteDataSource.getMoviesList(genreId, pageNumber);
         return Right(discoverMoviesApiResponse);
       } on ServerException {
-        return Left(ServerFailure());
+        return Left(ServerFailure(message: "Erro ao conectar com o servidor."));
       }
     } else {
       try {
@@ -38,7 +38,7 @@ class DiscoverMoviesRepositoryImplementation implements DiscoverMoviesRepository
         //TODO: Check for the first call
         return Right(discoverMoviesApiResponse);
       } on CacheException {
-        return Left(CacheFailure());
+        return Left(CacheFailure(message: "Error ao buscar dados locais."));
       }
     }
   }

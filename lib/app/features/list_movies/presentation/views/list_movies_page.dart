@@ -51,9 +51,8 @@ class _ListMoviesPageState
                         return MoviesListView(
                           moviesResults: controller.moviesResultList,
                         );
-                      if (controller.checkForState(ListPageStates.failure))
-                        return Center(child: Text("Failure"));
-                      return Container();
+                      if (controller.checkForState(ListPageStates.failure)) return Center(child: Text(controller.failure.message, style: TextStyle(color: Colors.black),));
+                      return Container(child: Center(child: Text("Failure")));
                     }),
                   )
                 ],

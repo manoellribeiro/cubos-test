@@ -37,7 +37,7 @@ abstract class _ListMoviesControllerBase with Store {
       moviesResult.fold(
         (errorResult){
           atualState = ListPageStates.failure;
-          failure = failure;
+          failure = errorResult;
           },
         (successResult){
           atualState = ListPageStates.success;
