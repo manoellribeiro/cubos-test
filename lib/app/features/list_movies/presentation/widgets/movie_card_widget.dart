@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cubos_test/app/core/functions/getGenreNameById.dart';
+import 'package:cubos_test/app/features/list_movies/presentation/views/controller/list_movies_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,7 +12,9 @@ class MovieCard extends StatelessWidget {
 
   final MovieResults movieResult;
 
-  const MovieCard({Key key, this.movieResult}) : super(key: key);
+  MovieCard({Key key, this.movieResult}) : super(key: key);
+
+  ListMoviesController controller = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +73,7 @@ class MovieCard extends StatelessWidget {
             children: [
               Text(movieResult.title, style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
               SizedBox(height: 12),
-              Row(
-                children: [
-                  Text("Ação", style: Theme.of(context).textTheme.bodyText2,),
-                  Text("Aventura", style: Theme.of(context).textTheme.bodyText2),
-                ],
-              ),
+              Text(controller.createGenreString(movieResult.genreIds), style: Theme.of(context).textTheme.bodyText2,),
               SizedBox(height: 32)
             ],
           ),

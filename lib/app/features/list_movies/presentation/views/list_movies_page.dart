@@ -19,8 +19,7 @@ class _ListMoviesPageState
   @override
   void initState() {
     controller
-        .getMoviesResultList(28, 1)
-        .then((value) => print(controller.moviesResultList));
+        .getMoviesResultList(28, 1);
     super.initState();
   }
 

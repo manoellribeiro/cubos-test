@@ -1,3 +1,4 @@
+import 'package:cubos_test/app/core/functions/getGenreNameById.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../../core/errors/failures/failure.dart';
@@ -47,6 +48,13 @@ abstract class _ListMoviesControllerBase with Store {
   }
 
   bool checkForState(ListPageStates stateToCheck) =>  atualState == stateToCheck;
+
+  String createGenreString(List<int> genreIds){
+    List<String> genresList = genreIds.map((genreId) => getGenreNameById(genreId)).toList();
+    String genreString = genresList.join(' - '); 
+    return genreString;
+  }
+
 }
 
 enum ListPageStates {
