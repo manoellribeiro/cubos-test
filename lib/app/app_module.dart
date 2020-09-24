@@ -13,6 +13,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'app_widget.dart';
+import 'features/list_movies/data/datasources/discover_movies_local_datasource/discover_movies_local_datasource_implementation.dart';
 
 class AppModule extends MainModule {
   @override
@@ -21,9 +22,11 @@ class AppModule extends MainModule {
       Bind((i) => GetMoviesResults(discoverMoviesRepository: Modular.get())),
       Bind((i) => DiscoverMoviesRepositoryImplementation(
         remoteDataSource: Modular.get(),
+        localDataSource: Modular.get(),
         networkInfo: NetworkInfoImplementation(connectivity: Connectivity())
         )),
       Bind((i) => DiscoverMoviesRemoteDataSourceImplementation(dio: Modular.get())),
+      Bind((i) => DiscoverMoviesLocalDataSourceImplementation()),
       Bind((i) => BaseOptions(baseUrl: THE_MOVIE_DB_BASE_URL)),
       Bind((i) => Dio(Modular.get())),
 

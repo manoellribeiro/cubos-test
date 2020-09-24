@@ -28,13 +28,14 @@ class DiscoverMoviesRepositoryImplementation implements DiscoverMoviesRepository
     if(await networkInfo.isConnected){
       try {
         DiscoverMoviesApiResponse discoverMoviesApiResponse = await remoteDataSource.getMoviesList(genreId, pageNumber);
+        await localDataSource.storeLastDiscoverMoviesApiResponse(discoverMoviesApiResponse, genreId);
         return Right(discoverMoviesApiResponse);
       } on ServerException {
         return Left(ServerFailure(message: "Erro ao conectar com o servidor."));
       }
     } else {
       try {
-        DiscoverMoviesApiResponse discoverMoviesApiResponse = await localDataSource.getMoviesList(genreId);
+        DiscoverMoviesApiResponse discoverMoviesApiResponse = await localDataSource.getLastDiscoverMoviesApiResponse(genreId);
         //TODO: Check for the first call
         return Right(discoverMoviesApiResponse);
       } on CacheException {

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cubos_test/app/core/configs/size_config.dart';
 import 'package:cubos_test/app/core/utils/constants.dart';
 import 'package:cubos_test/app/features/list_movies/domain/entities/MovieResults.dart';
@@ -19,7 +20,7 @@ class MovieCard extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(10)),
         image: DecorationImage(
           fit: BoxFit.fitHeight,
-          image: NetworkImage('$THE_MOVIE_DB_IMAGE_BASE_URL${movieResult.posterPath}'))
+          image: CachedNetworkImageProvider('$THE_MOVIE_DB_IMAGE_BASE_URL${movieResult.posterPath}'))
       ),
       child: Padding(
         padding: EdgeInsets.only(left: 24),
