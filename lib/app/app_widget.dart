@@ -15,7 +15,7 @@ class AppWidget extends StatelessWidget {
           navigatorKey: Modular.navigatorKey,
           title: 'ProtoBIM Dashboards',
           theme: AppTheme.lightThemeHome,
-          initialRoute: '/login',
+          initialRoute: '/',
           onGenerateRoute: Modular.generateRoute,
         );
       });

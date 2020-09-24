@@ -34,7 +34,7 @@ class DiscoverMoviesRepositoryImplementation implements DiscoverMoviesRepository
       }
     } else {
       try {
-        DiscoverMoviesApiResponse discoverMoviesApiResponse = await localDataSource.getMoviesList(genreId, pageNumber);
+        DiscoverMoviesApiResponse discoverMoviesApiResponse = await localDataSource.getMoviesList(genreId);
         //TODO: Check for the first call
         return Right(discoverMoviesApiResponse);
       } on CacheException {
