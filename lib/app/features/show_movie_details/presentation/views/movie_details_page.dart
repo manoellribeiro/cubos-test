@@ -13,6 +13,13 @@ class MovieDetailsPage extends StatefulWidget {
 }
 
 class _MovieDetailsPageState extends ModularState<MovieDetailsPage, MovieDetailsController> {
+  
+  @override
+  void initState() {
+    controller.getMovieDetailsAction(widget.arguments['movieId']);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold();

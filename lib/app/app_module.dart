@@ -56,7 +56,7 @@ class AppModule extends MainModule {
   @override
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, child: (_, args) => ListMoviesPage()),
-        ModularRouter('/showDetails', child: (_, args) => MovieDetailsPage(arguments: args.data)),
+        ModularRouter('/showDetails', transition: TransitionType.fadeIn, child: (_, args) => MovieDetailsPage(arguments: args.data)),
       ];
 
   @override
