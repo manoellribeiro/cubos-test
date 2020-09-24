@@ -2,6 +2,7 @@ import 'Genre.dart';
 import 'ProductionCompany.dart';
 
 class MovieDetails {
+  int id;
   int budget;
   List<Genre> genres;
   String originalTitle;
@@ -16,6 +17,7 @@ class MovieDetails {
 
   MovieDetails(
       {
+      this.id,
       this.budget,
       this.genres,
       this.originalTitle,
@@ -48,6 +50,7 @@ class MovieDetails {
     }
     releaseDate = json['release_date'];
     revenue = json['revenue'];
+    id = json['id'];
     runtime = json['runtime'];
     title = json['title'];
     voteAverage = json['vote_average'];
@@ -68,6 +71,7 @@ class MovieDetails {
     }
     data['release_date'] = this.releaseDate;
     data['revenue'] = this.revenue;
+    data['id'] = this.id;
     data['runtime'] = this.runtime;
     data['title'] = this.title;
     data['vote_average'] = this.voteAverage;
