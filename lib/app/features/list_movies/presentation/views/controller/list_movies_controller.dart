@@ -12,7 +12,7 @@ abstract class _ListMoviesControllerBase with Store {
   final GetMoviesResults getMoviesResults;
 
   _ListMoviesControllerBase({this.getMoviesResults}){
-    getMoviesResults(28, 1);
+    
   }
 
   @observable

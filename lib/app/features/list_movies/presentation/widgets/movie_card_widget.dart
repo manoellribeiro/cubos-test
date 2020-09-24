@@ -13,10 +13,13 @@ class MovieCard extends StatelessWidget {
     return Container(
       height: SizeConfig.heightMultiplier * 80,
       width: SizeConfig.widthMultiplier * 100,
-      margin: EdgeInsets.symmetric(horizontal: 20),      
+      margin: EdgeInsets.only(left: 20, right: 20, bottom: 16),      
       decoration: BoxDecoration(
+        color: Colors.red,
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        image: DecorationImage(image: NetworkImage('https://image.tmdb.org/t/p/w500/72I82eKXCadZWEYygV9GkJOQNEq.jpg'))
+        image: DecorationImage(
+          fit: BoxFit.fitHeight,
+          image: NetworkImage('https://image.tmdb.org/t/p/w500/72I82eKXCadZWEYygV9GkJOQNEq.jpg'))
       ),
       child: Padding(
         padding: EdgeInsets.only(left: 24),

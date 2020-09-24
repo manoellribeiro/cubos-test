@@ -1,4 +1,5 @@
 import 'package:cubos_test/app/core/configs/size_config.dart';
+import 'package:cubos_test/app/features/list_movies/presentation/views/controller/list_movies_controller.dart';
 import 'package:cubos_test/app/features/list_movies/presentation/widgets/genre_tab_bar_widget.dart';
 import 'package:cubos_test/app/features/list_movies/presentation/widgets/movies_listview_widget.dart';
 import 'package:cubos_test/app/features/list_movies/presentation/widgets/rounded_search_textfield_widget.dart';
@@ -10,7 +11,14 @@ class ListMoviesPage extends StatefulWidget {
   _ListMoviesPageState createState() => _ListMoviesPageState();
 }
 
-class _ListMoviesPageState extends State<ListMoviesPage> {
+class _ListMoviesPageState extends ModularState<ListMoviesPage, ListMoviesController> {
+  
+  @override
+  void initState() {
+    controller.getMoviesResults(28, 1).then((value) => print(value));
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

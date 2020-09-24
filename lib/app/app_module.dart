@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:cubos_test/app/core/network/network_info.dart';
 import 'package:cubos_test/app/core/network/network_info_implementation.dart';
 import 'package:cubos_test/app/core/utils/constants.dart';
@@ -20,8 +21,7 @@ class AppModule extends MainModule {
       Bind((i) => GetMoviesResults(discoverMoviesRepository: Modular.get())),
       Bind((i) => DiscoverMoviesRepositoryImplementation(
         remoteDataSource: Modular.get(),
-        localDataSource: Modular.get(),
-        networkInfo: NetworkInfoImplementation()
+        networkInfo: NetworkInfoImplementation(connectivity: Connectivity())
         )),
       Bind((i) => DiscoverMoviesRemoteDataSourceImplementation(dio: Modular.get())),
       Bind((i) => BaseOptions(baseUrl: THE_MOVIE_DB_BASE_URL)),
