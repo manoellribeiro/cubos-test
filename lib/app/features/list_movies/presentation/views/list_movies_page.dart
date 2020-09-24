@@ -1,4 +1,5 @@
 import 'package:cubos_test/app/core/configs/size_config.dart';
+import 'package:cubos_test/app/core/utils/constants.dart';
 import 'package:cubos_test/app/features/list_movies/presentation/views/controller/list_movies_controller.dart';
 import 'package:cubos_test/app/features/list_movies/presentation/widgets/genre_tab_bar_widget.dart';
 import 'package:cubos_test/app/features/list_movies/presentation/widgets/movies_listview_widget.dart';
@@ -108,22 +109,34 @@ class _ListMoviesPageState
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             GenreTabBar(
-                              onTap: () => controller.setSelectedTabBarIndex(0),
+                              onTap: () {
+                                controller.setSelectedTabBarIndex(0);
+                                controller.getMoviesResultList(ACTION_GENRE_ID, 1);
+                                },
                               isSelect: controller.isSelect(0),
                               genreName: "Ação",
                             ),
                             GenreTabBar(
-                                onTap: () => controller.setSelectedTabBarIndex(1),
+                                onTap: (){
+                                  controller.setSelectedTabBarIndex(1);
+                                  controller.getMoviesResultList(ADVENTURE_GENRE_ID, 1);
+                                  },
                                 isSelect: controller.isSelect(1),
                                 genreName: "Aventura",
                               ),
                             GenreTabBar(
-                              onTap: () => controller.setSelectedTabBarIndex(2),
+                              onTap: (){
+                                controller.setSelectedTabBarIndex(2);
+                                controller.getMoviesResultList(FANTASY_GENRE_ID, 1);  
+                              },
                               isSelect: controller.isSelect(2),
                               genreName: "Fantasia",
                             ),
                             GenreTabBar(
-                              onTap: () => controller.setSelectedTabBarIndex(3),
+                              onTap: (){
+                                controller.setSelectedTabBarIndex(3);
+                                controller.getMoviesResultList(COMEDY_GENRE_ID, 1);
+                                },
                               isSelect: controller.isSelect(3),
                               genreName: "Comédia",
                             ),
