@@ -1,4 +1,5 @@
 import 'package:cubos_test/app/core/configs/size_config.dart';
+import 'package:cubos_test/app/features/list_movies/presentation/widgets/genre_tab_bar_widget.dart';
 import 'package:cubos_test/app/features/list_movies/presentation/widgets/rounded_search_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -20,7 +21,6 @@ class _ListMoviesPageState extends State<ListMoviesPage> {
             left: 0,
             child: Container(
               color: Colors.white,
-              height: SizeConfig.heightMultiplier * 28,
               width: SizeConfig.widthMultiplier * 100,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier * 5),
@@ -39,6 +39,28 @@ class _ListMoviesPageState extends State<ListMoviesPage> {
                       textInputType: TextInputType.text,
                       obscureText: false,
                     ),
+                    SizedBox(height: SizeConfig.widthMultiplier * 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GenreTabBar(
+                          isSelect: true,
+                          genreName: "Ação",
+                        ),
+                        GenreTabBar(
+                          isSelect: true,
+                          genreName: "Aventura",
+                        ),
+                        GenreTabBar(
+                          isSelect: true,
+                          genreName: "Fantasia",
+                        ),
+                        GenreTabBar(
+                          isSelect: true,
+                          genreName: "Comédia",
+                        ),
+                      ],),
+                      SizedBox(height: SizeConfig.heightMultiplier * 5)
                   ],
                 ),
               )
