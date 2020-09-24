@@ -15,6 +15,7 @@ class MovieCard extends StatelessWidget {
       width: SizeConfig.widthMultiplier * 100,
       margin: EdgeInsets.symmetric(horizontal: 20),      
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         image: DecorationImage(image: NetworkImage('https://image.tmdb.org/t/p/w500/72I82eKXCadZWEYygV9GkJOQNEq.jpg'))
       ),
       child: Padding(
