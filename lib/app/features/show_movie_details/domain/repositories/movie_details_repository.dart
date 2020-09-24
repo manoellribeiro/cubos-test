@@ -3,5 +3,5 @@ import 'package:cubos_test/app/features/show_movie_details/domain/entities/Movie
 import 'package:dartz/dartz.dart';
 
 abstract class MovieDetailsRepository {
-  Future<Either<Failure, MovieDetails>> getMoviesList(int movieId);
+  Future<Either<Failure, MovieDetails>> getMovieDetails(int movieId);
 }
