@@ -1,8 +1,9 @@
-import 'package:cubos_test/app/core/errors/exceptions/server_exception.dart';
-import 'package:cubos_test/app/core/utils/constants.dart';
-import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_remote_datasource/discover_movies_remote_datasource.dart';
-import 'package:cubos_test/app/features/list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
 import 'package:dio/dio.dart';
+
+import '../../../../../core/errors/exceptions/server_exception.dart';
+import '../../../../../core/utils/constants.dart';
+import '../../../domain/entities/DiscoverMoviesApiResponse.dart';
+import 'discover_movies_remote_datasource.dart';
 class DiscoverMoviesRemoteDataSourceImplementation implements DiscoverMoviesRemoteDataSource {
   
   final Dio dio;

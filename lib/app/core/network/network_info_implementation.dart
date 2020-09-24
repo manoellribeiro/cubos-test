@@ -1,5 +1,6 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:cubos_test/app/core/network/network_info.dart';
+
+import 'network_info.dart';
 
 class NetworkInfoImplementation implements NetworkInfo {
   

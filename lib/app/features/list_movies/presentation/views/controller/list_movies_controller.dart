@@ -1,8 +1,9 @@
-import 'package:cubos_test/app/core/errors/failures/failure.dart';
-import 'package:cubos_test/app/features/list_movies/domain/entities/MovieResults.dart';
-import 'package:cubos_test/app/features/list_movies/domain/usecases/get_movies_results.dart';
-import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../../../core/errors/failures/failure.dart';
+import '../../../domain/entities/MovieResults.dart';
+import '../../../domain/usecases/get_movies_results.dart';
+
 part 'list_movies_controller.g.dart';
 
 class ListMoviesController = _ListMoviesControllerBase with _$ListMoviesController;

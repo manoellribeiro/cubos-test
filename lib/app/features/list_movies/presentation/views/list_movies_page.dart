@@ -1,12 +1,13 @@
-import 'package:cubos_test/app/core/configs/size_config.dart';
-import 'package:cubos_test/app/core/utils/constants.dart';
-import 'package:cubos_test/app/features/list_movies/presentation/views/controller/list_movies_controller.dart';
-import 'package:cubos_test/app/features/list_movies/presentation/widgets/genre_tab_bar_widget.dart';
-import 'package:cubos_test/app/features/list_movies/presentation/widgets/movies_listview_widget.dart';
-import 'package:cubos_test/app/features/list_movies/presentation/widgets/rounded_search_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../../core/configs/size_config.dart';
+import '../../../../core/utils/constants.dart';
+import '../widgets/genre_tab_bar_widget.dart';
+import '../widgets/movies_listview_widget.dart';
+import '../widgets/rounded_search_textfield_widget.dart';
+import 'controller/list_movies_controller.dart';
 
 class ListMoviesPage extends StatefulWidget {
   @override

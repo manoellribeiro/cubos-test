@@ -1,6 +1,6 @@
-import 'package:cubos_test/app/features/list_movies/domain/entities/MovieResults.dart';
 import 'package:flutter/material.dart';
 
+import '../../domain/entities/MovieResults.dart';
 import 'movie_card_widget.dart';
 
 class MoviesListView extends StatelessWidget {

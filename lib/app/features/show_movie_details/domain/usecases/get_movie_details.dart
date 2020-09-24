@@ -1,7 +1,7 @@
-import 'package:cubos_test/app/core/errors/failures/failure.dart';
-import 'package:cubos_test/app/features/list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
-import 'package:cubos_test/app/features/show_movie_details/domain/entities/MovieDetails.dart';
-import 'package:cubos_test/app/features/show_movie_details/domain/repositories/movie_details_repository.dart';
+import '../../../../core/errors/failures/failure.dart';
+import '../../../list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
+import '../entities/MovieDetails.dart';
+import '../repositories/movie_details_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class GetMovieDetails {

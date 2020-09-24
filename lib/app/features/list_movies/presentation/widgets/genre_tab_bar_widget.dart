@@ -1,4 +1,4 @@
-import 'package:cubos_test/app/core/configs/size_config.dart';
+import '../../../../core/configs/size_config.dart';
 import 'package:flutter/material.dart';
 
 class GenreTabBar extends StatelessWidget {

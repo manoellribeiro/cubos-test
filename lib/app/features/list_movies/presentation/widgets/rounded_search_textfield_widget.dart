@@ -1,5 +1,6 @@
-import 'package:cubos_test/app/core/configs/size_config.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/configs/size_config.dart';
 
 class RoundedSearchTextField extends StatelessWidget {
 

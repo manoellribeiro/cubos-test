@@ -1,4 +1,4 @@
-import 'package:cubos_test/app/features/list_movies/domain/entities/MovieResults.dart';
+import 'MovieResults.dart';
 
 class DiscoverMoviesApiResponse {
 	int page;

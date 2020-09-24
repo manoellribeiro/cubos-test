@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_local_datasource/discover_movies_local_datasource.dart';
-import 'package:cubos_test/app/features/list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../domain/entities/DiscoverMoviesApiResponse.dart';
+import 'discover_movies_local_datasource.dart';
 
 class DiscoverMoviesLocalDataSourceImplementation implements DiscoverMoviesLocalDataSource {
   

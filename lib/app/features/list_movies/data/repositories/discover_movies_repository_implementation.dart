@@ -1,14 +1,15 @@
-import 'package:cubos_test/app/core/errors/exceptions/cache_exception.dart';
-import 'package:cubos_test/app/core/errors/exceptions/server_exception.dart';
-import 'package:cubos_test/app/core/errors/failures/cache_failure.dart';
-import 'package:cubos_test/app/core/errors/failures/server_failure.dart';
-import 'package:cubos_test/app/core/network/network_info.dart';
-import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_local_datasource/discover_movies_local_datasource.dart';
-import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_remote_datasource/discover_movies_remote_datasource.dart';
-import 'package:cubos_test/app/features/list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
-import 'package:cubos_test/app/core/errors/failures/failure.dart';
-import 'package:cubos_test/app/features/list_movies/domain/repositories/discover_movies_repository.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../core/errors/exceptions/cache_exception.dart';
+import '../../../../core/errors/exceptions/server_exception.dart';
+import '../../../../core/errors/failures/cache_failure.dart';
+import '../../../../core/errors/failures/failure.dart';
+import '../../../../core/errors/failures/server_failure.dart';
+import '../../../../core/network/network_info.dart';
+import '../../domain/entities/DiscoverMoviesApiResponse.dart';
+import '../../domain/repositories/discover_movies_repository.dart';
+import '../datasources/discover_movies_local_datasource/discover_movies_local_datasource.dart';
+import '../datasources/discover_movies_remote_datasource/discover_movies_remote_datasource.dart';
 
 class DiscoverMoviesRepositoryImplementation implements DiscoverMoviesRepository {
   
