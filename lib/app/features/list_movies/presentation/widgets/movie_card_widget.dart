@@ -1,4 +1,5 @@
 import 'package:cubos_test/app/core/configs/size_config.dart';
+import 'package:cubos_test/app/core/utils/constants.dart';
 import 'package:cubos_test/app/features/list_movies/domain/entities/MovieResults.dart';
 import 'package:flutter/material.dart';
 
@@ -15,11 +16,10 @@ class MovieCard extends StatelessWidget {
       width: SizeConfig.widthMultiplier * 100,
       margin: EdgeInsets.only(left: 20, right: 20, bottom: 16),      
       decoration: BoxDecoration(
-        color: Colors.red,
         borderRadius: BorderRadius.all(Radius.circular(10)),
         image: DecorationImage(
           fit: BoxFit.fitHeight,
-          image: NetworkImage('https://image.tmdb.org/t/p/w500/72I82eKXCadZWEYygV9GkJOQNEq.jpg'))
+          image: NetworkImage('$THE_MOVIE_DB_IMAGE_BASE_URL${movieResult.posterPath}'))
       ),
       child: Padding(
         padding: EdgeInsets.only(left: 24),
@@ -27,7 +27,7 @@ class MovieCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text("Mulan", style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
+            Text(movieResult.title, style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
             SizedBox(height: 12),
             Row(
               children: [

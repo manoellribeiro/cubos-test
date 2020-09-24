@@ -15,8 +15,8 @@ class MoviesListView extends StatelessWidget {
       shrinkWrap: true,
       itemCount: 10,
       itemBuilder: (context, index) {
-        // MovieResults movieResult = moviesResults[index];
-        return MovieCard();
+        MovieResults movieResult = moviesResults[index];
+        return MovieCard(movieResult: movieResult,);
       });
   }
 }

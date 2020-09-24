@@ -11,19 +11,37 @@ abstract class _ListMoviesControllerBase with Store {
   
   final GetMoviesResults getMoviesResults;
 
-  _ListMoviesControllerBase({this.getMoviesResults}){
-    
-  }
+  _ListMoviesControllerBase({this.getMoviesResults});
 
   @observable
-  Either<Failure,List<MovieResults>> moviesResultListOrFailure;
+  List<MovieResults> moviesResultList;
+
+  @observable
+  Failure failure;
+
+  @observable
+  ListPageStates atualState;
 
   @action
   Future getMoviesResultList(genreId, pageNumber) async {
+      atualState = ListPageStates.loading;
       final moviesResult = await getMoviesResults.call(genreId, pageNumber);  
       moviesResult.fold(
-        (l) => moviesResultListOrFailure = Left(l),
-        (r) => moviesResultListOrFailure = Right(r.results));
+        (errorResult){
+          atualState = ListPageStates.failure;
+          failure = failure;
+          },
+        (successResult){
+          atualState = ListPageStates.success;
+          moviesResultList = successResult.results;
+          });
   }
 
+  bool checkForState(ListPageStates stateToCheck) =>  atualState == stateToCheck;
+}
+
+enum ListPageStates {
+  loading,
+  success,
+  failure
 }

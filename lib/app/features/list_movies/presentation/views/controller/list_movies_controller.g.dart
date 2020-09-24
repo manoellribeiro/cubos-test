@@ -9,20 +9,49 @@ part of 'list_movies_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ListMoviesController on _ListMoviesControllerBase, Store {
-  final _$moviesResultListOrFailureAtom =
-      Atom(name: '_ListMoviesControllerBase.moviesResultListOrFailure');
+  final _$moviesResultListAtom =
+      Atom(name: '_ListMoviesControllerBase.moviesResultList');
 
   @override
-  Either<Failure, List<MovieResults>> get moviesResultListOrFailure {
-    _$moviesResultListOrFailureAtom.reportRead();
-    return super.moviesResultListOrFailure;
+  List<MovieResults> get moviesResultList {
+    _$moviesResultListAtom.reportRead();
+    return super.moviesResultList;
   }
 
   @override
-  set moviesResultListOrFailure(Either<Failure, List<MovieResults>> value) {
-    _$moviesResultListOrFailureAtom
-        .reportWrite(value, super.moviesResultListOrFailure, () {
-      super.moviesResultListOrFailure = value;
+  set moviesResultList(List<MovieResults> value) {
+    _$moviesResultListAtom.reportWrite(value, super.moviesResultList, () {
+      super.moviesResultList = value;
+    });
+  }
+
+  final _$failureAtom = Atom(name: '_ListMoviesControllerBase.failure');
+
+  @override
+  Failure get failure {
+    _$failureAtom.reportRead();
+    return super.failure;
+  }
+
+  @override
+  set failure(Failure value) {
+    _$failureAtom.reportWrite(value, super.failure, () {
+      super.failure = value;
+    });
+  }
+
+  final _$atualStateAtom = Atom(name: '_ListMoviesControllerBase.atualState');
+
+  @override
+  ListPageStates get atualState {
+    _$atualStateAtom.reportRead();
+    return super.atualState;
+  }
+
+  @override
+  set atualState(ListPageStates value) {
+    _$atualStateAtom.reportWrite(value, super.atualState, () {
+      super.atualState = value;
     });
   }
 
@@ -38,7 +67,9 @@ mixin _$ListMoviesController on _ListMoviesControllerBase, Store {
   @override
   String toString() {
     return '''
-moviesResultListOrFailure: ${moviesResultListOrFailure}
+moviesResultList: ${moviesResultList},
+failure: ${failure},
+atualState: ${atualState}
     ''';
   }
 }
