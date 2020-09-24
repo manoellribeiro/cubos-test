@@ -12,21 +12,43 @@ import 'features/list_movies/data/repositories/discover_movies_repository_implem
 import 'features/list_movies/domain/usecases/get_movies_results.dart';
 import 'features/list_movies/presentation/views/controller/list_movies_controller.dart';
 import 'features/list_movies/presentation/views/list_movies_page.dart';
+import 'features/show_movie_details/data/datasources/movie_details_local_datasource/movie_details_local_datasource_implementation.dart';
+import 'features/show_movie_details/data/datasources/movie_details_remote_datasource/movie_details_remote_datasource_implementation.dart';
+import 'features/show_movie_details/data/repositories/movie_details_repository_implementation.dart';
+import 'features/show_movie_details/domain/usecases/get_movie_details.dart';
+import 'features/show_movie_details/presentation/views/controller/movie_details_controller.dart';
 
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
-      Bind((i) => ListMoviesController(getMoviesResults: Modular.get())),
-      Bind((i) => GetMoviesResults(discoverMoviesRepository: Modular.get())),
+      //Core
+      Bind((i) => BaseOptions(baseUrl: THE_MOVIE_DB_BASE_URL)),
+      Bind((i) => Dio(Modular.get())),
+      Bind((i) => Connectivity()),
+      Bind((i) => NetworkInfoImplementation(connectivity: Modular.get())),
+
+      //Featura - List Movies
+      Bind((i) => DiscoverMoviesRemoteDataSourceImplementation(dio: Modular.get())),
+      Bind((i) => DiscoverMoviesLocalDataSourceImplementation()),
       Bind((i) => DiscoverMoviesRepositoryImplementation(
         remoteDataSource: Modular.get(),
         localDataSource: Modular.get(),
-        networkInfo: NetworkInfoImplementation(connectivity: Connectivity())
+        networkInfo: Modular.get()
         )),
-      Bind((i) => DiscoverMoviesRemoteDataSourceImplementation(dio: Modular.get())),
-      Bind((i) => DiscoverMoviesLocalDataSourceImplementation()),
-      Bind((i) => BaseOptions(baseUrl: THE_MOVIE_DB_BASE_URL)),
-      Bind((i) => Dio(Modular.get())),
+      Bind((i) => GetMoviesResults(discoverMoviesRepository: Modular.get())),
+      Bind((i) => ListMoviesController(getMoviesResults: Modular.get())),
+      
+
+      //Feature - Show Movie Details
+      Bind((i) => MovieDetailsRemoteDataSourceImplementation(dio: Modular.get())),
+      Bind((i) => MovieDetailsLocalDataSourceImplementation()),
+      Bind((i) => MovieDetailsRepositoryImplementation(
+        remoteDataSource: Modular.get(),
+        localDataSource: Modular.get(),
+        networkInfo: Modular.get()
+        )),
+      Bind((i) => GetMovieDetails(movieDetailsRepository: Modular.get())),
+      Bind((i) => MovieDetailsController(getMovieDetails: Modular.get())),
 
     ];
 

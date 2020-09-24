@@ -10,8 +10,6 @@ class MovieDetailsPage extends StatefulWidget {
 class _MovieDetailsPageState extends ModularState<MovieDetailsPage, MovieDetailsController> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-    );
+    return Scaffold();
   }
 }
