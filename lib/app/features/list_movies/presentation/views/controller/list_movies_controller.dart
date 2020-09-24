@@ -27,7 +27,7 @@ abstract class _ListMoviesControllerBase with Store {
   int selectedTabBarIndex = 0;
 
   @action
-  void setSelectedTabBarIndex(int value) => selectedTabBarIndex = value;
+  void setSelectedTabBarIndex(int value) => selectedTabBarIndex = value; 
 
   bool isSelect(int tabBarIndex) => selectedTabBarIndex == tabBarIndex;
 
