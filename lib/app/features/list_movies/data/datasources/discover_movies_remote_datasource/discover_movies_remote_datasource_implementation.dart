@@ -24,7 +24,8 @@ class DiscoverMoviesRemoteDataSourceImplementation implements DiscoverMoviesRemo
            "page": pageNumber,
            "with_genres": "$genreId"
          }
-         );  
+         );
+         return DiscoverMoviesApiResponse.fromJson(response.data);  
     } catch (e) {
       throw ServerException();
     }
