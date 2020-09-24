@@ -1,3 +1,4 @@
+import 'Credits.dart';
 import 'Genre.dart';
 import 'ProductionCompany.dart';
 
@@ -14,10 +15,12 @@ class MovieDetails {
   int runtime;
   String title;
   double voteAverage;
+  Credits credits;
 
   MovieDetails(
       {
       this.id,
+      this.credits,
       this.budget,
       this.genres,
       this.originalTitle,
@@ -54,6 +57,8 @@ class MovieDetails {
     runtime = json['runtime'];
     title = json['title'];
     voteAverage = json['vote_average'];
+    credits =
+        json['credits'] != null ? new Credits.fromJson(json['credits']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -75,6 +80,9 @@ class MovieDetails {
     data['runtime'] = this.runtime;
     data['title'] = this.title;
     data['vote_average'] = this.voteAverage;
+    if (this.credits != null) {
+      data['credits'] = this.credits.toJson();
+    }
     return data;
   }
 }
