@@ -14,6 +14,7 @@ class AppTheme {
     textTheme: TextTheme(
       bodyText1: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500),
       bodyText2: TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w400),
+      button: TextStyle(fontSize: 12, color: gray02),
       subtitle2: TextStyle(
         fontSize: 14,
         color: gray02,

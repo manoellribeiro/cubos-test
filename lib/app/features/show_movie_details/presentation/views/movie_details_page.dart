@@ -1,6 +1,9 @@
+import 'package:cubos_test/app/core/configs/size_config.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/views/controller/movie_details_controller.dart';
+import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/return_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hive/hive.dart';
 
 class MovieDetailsPage extends StatefulWidget {
 
@@ -22,6 +25,30 @@ class _MovieDetailsPageState extends ModularState<MovieDetailsPage, MovieDetails
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Container(
+      height: SizeConfig.heightMultiplier * 100,
+      width: SizeConfig.widthMultiplier * 100,
+      decoration: BoxDecoration(
+        color: Colors.red,
+        gradient: LinearGradient(
+          colors: [
+            Theme.of(context).backgroundColor,
+             Theme.of(context).backgroundColor,
+             Theme.of(context).scaffoldBackgroundColor,
+             Theme.of(context).scaffoldBackgroundColor],
+          stops: [0.0, 0.4, 0.4, 1],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter
+        )
+      ),
+      child: Column(
+        children: [
+          SizedBox(height: SizeConfig.heightMultiplier * 7),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ReturnButton())
+        ]
+      ),
+    );
   }
 }
