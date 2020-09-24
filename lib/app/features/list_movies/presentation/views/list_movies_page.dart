@@ -44,9 +44,14 @@ class _ListMoviesPageState
                   Expanded(
                     flex: 1,
                     child: Observer(builder: (_) {
-                      if(controller.checkForState(ListPageStates.loading)) return Center(child: CircularProgressIndicator());
-                      if(controller.checkForState(ListPageStates.success)) return MoviesListView(moviesResults: controller.moviesResultList,);
-                      if(controller.checkForState(ListPageStates.failure)) return Center(child: Text("Failure")); 
+                      if (controller.checkForState(ListPageStates.loading))
+                        return Center(child: CircularProgressIndicator());
+                      if (controller.checkForState(ListPageStates.success))
+                        return MoviesListView(
+                          moviesResults: controller.moviesResultList,
+                        );
+                      if (controller.checkForState(ListPageStates.failure))
+                        return Center(child: Text("Failure"));
                       return Container();
                     }),
                   )
@@ -98,27 +103,33 @@ class _ListMoviesPageState
                       SizedBox(
                         height: SizeConfig.widthMultiplier * 5,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GenreTabBar(
-                            isSelect: true,
-                            genreName: "Ação",
-                          ),
-                          GenreTabBar(
-                            isSelect: true,
-                            genreName: "Aventura",
-                          ),
-                          GenreTabBar(
-                            isSelect: true,
-                            genreName: "Fantasia",
-                          ),
-                          GenreTabBar(
-                            isSelect: true,
-                            genreName: "Comédia",
-                          ),
-                        ],
-                      ),
+                      Observer(builder: (_) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GenreTabBar(
+                              onTap: () => controller.setSelectedTabBarIndex(0),
+                              isSelect: controller.isSelect(0),
+                              genreName: "Ação",
+                            ),
+                            GenreTabBar(
+                                onTap: () => controller.setSelectedTabBarIndex(1),
+                                isSelect: controller.isSelect(1),
+                                genreName: "Aventura",
+                              ),
+                            GenreTabBar(
+                              onTap: () => controller.setSelectedTabBarIndex(2),
+                              isSelect: controller.isSelect(2),
+                              genreName: "Fantasia",
+                            ),
+                            GenreTabBar(
+                              onTap: () => controller.setSelectedTabBarIndex(3),
+                              isSelect: controller.isSelect(3),
+                              genreName: "Comédia",
+                            ),
+                          ],
+                        );
+                      }),
                     ],
                   ),
                 )),

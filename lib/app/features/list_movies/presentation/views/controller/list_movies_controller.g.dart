@@ -55,6 +55,22 @@ mixin _$ListMoviesController on _ListMoviesControllerBase, Store {
     });
   }
 
+  final _$selectedTabBarIndexAtom =
+      Atom(name: '_ListMoviesControllerBase.selectedTabBarIndex');
+
+  @override
+  int get selectedTabBarIndex {
+    _$selectedTabBarIndexAtom.reportRead();
+    return super.selectedTabBarIndex;
+  }
+
+  @override
+  set selectedTabBarIndex(int value) {
+    _$selectedTabBarIndexAtom.reportWrite(value, super.selectedTabBarIndex, () {
+      super.selectedTabBarIndex = value;
+    });
+  }
+
   final _$getMoviesResultListAsyncAction =
       AsyncAction('_ListMoviesControllerBase.getMoviesResultList');
 
@@ -64,12 +80,27 @@ mixin _$ListMoviesController on _ListMoviesControllerBase, Store {
         .run(() => super.getMoviesResultList(genreId, pageNumber));
   }
 
+  final _$_ListMoviesControllerBaseActionController =
+      ActionController(name: '_ListMoviesControllerBase');
+
+  @override
+  void setSelectedTabBarIndex(int value) {
+    final _$actionInfo = _$_ListMoviesControllerBaseActionController
+        .startAction(name: '_ListMoviesControllerBase.setSelectedTabBarIndex');
+    try {
+      return super.setSelectedTabBarIndex(value);
+    } finally {
+      _$_ListMoviesControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 moviesResultList: ${moviesResultList},
 failure: ${failure},
-atualState: ${atualState}
+atualState: ${atualState},
+selectedTabBarIndex: ${selectedTabBarIndex}
     ''';
   }
 }

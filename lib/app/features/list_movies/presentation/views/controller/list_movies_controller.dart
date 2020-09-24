@@ -22,6 +22,14 @@ abstract class _ListMoviesControllerBase with Store {
   @observable
   ListPageStates atualState;
 
+  @observable
+  int selectedTabBarIndex = 0;
+
+  @action
+  void setSelectedTabBarIndex(int value) => selectedTabBarIndex = value;
+
+  bool isSelect(int tabBarIndex) => selectedTabBarIndex == tabBarIndex;
+
   @action
   Future getMoviesResultList(genreId, pageNumber) async {
       atualState = ListPageStates.loading;
