@@ -12,7 +12,37 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return CachedNetworkImage(
+      imageUrl: '$THE_MOVIE_DB_IMAGE_BASE_URL${movieResult.posterPath}',
+      errorWidget: (context, url , error) => Container(
+      height: SizeConfig.heightMultiplier * 30,
+      width: SizeConfig.widthMultiplier * 100,
+      margin: EdgeInsets.only(left: 20, right: 20, bottom: 16),      
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(left: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(movieResult.title, style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
+            SizedBox(height: 12),
+            Row(
+              children: [
+                Text("Ação", style: Theme.of(context).textTheme.bodyText2,),
+                Text("Aventura", style: Theme.of(context).textTheme.bodyText2),
+              ],
+            ),
+            SizedBox(height: 32),
+            Text("Erro ao baixar imagem", style: TextStyle(fontSize: 10, color: Colors.red)),
+          ],
+        ),
+      ),
+    ),
+      imageBuilder: (context, imageProvider) => Container(
       height: SizeConfig.heightMultiplier * 80,
       width: SizeConfig.widthMultiplier * 100,
       margin: EdgeInsets.only(left: 20, right: 20, bottom: 16),      
@@ -20,7 +50,7 @@ class MovieCard extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(10)),
         image: DecorationImage(
           fit: BoxFit.fitHeight,
-          image: CachedNetworkImageProvider('$THE_MOVIE_DB_IMAGE_BASE_URL${movieResult.posterPath}'))
+          image: imageProvider)
       ),
       child: Padding(
         padding: EdgeInsets.only(left: 24),
@@ -40,6 +70,9 @@ class MovieCard extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 }
+
+
