@@ -13,15 +13,32 @@ mixin _$ListMoviesController on _ListMoviesControllerBase, Store {
       Atom(name: '_ListMoviesControllerBase.moviesResultList');
 
   @override
-  List<MovieResults> get moviesResultList {
+  ObservableList<MovieResults> get moviesResultList {
     _$moviesResultListAtom.reportRead();
     return super.moviesResultList;
   }
 
   @override
-  set moviesResultList(List<MovieResults> value) {
+  set moviesResultList(ObservableList<MovieResults> value) {
     _$moviesResultListAtom.reportWrite(value, super.moviesResultList, () {
       super.moviesResultList = value;
+    });
+  }
+
+  final _$lastDiscoverMoviesApiResponseAtom =
+      Atom(name: '_ListMoviesControllerBase.lastDiscoverMoviesApiResponse');
+
+  @override
+  DiscoverMoviesApiResponse get lastDiscoverMoviesApiResponse {
+    _$lastDiscoverMoviesApiResponseAtom.reportRead();
+    return super.lastDiscoverMoviesApiResponse;
+  }
+
+  @override
+  set lastDiscoverMoviesApiResponse(DiscoverMoviesApiResponse value) {
+    _$lastDiscoverMoviesApiResponseAtom
+        .reportWrite(value, super.lastDiscoverMoviesApiResponse, () {
+      super.lastDiscoverMoviesApiResponse = value;
     });
   }
 
@@ -80,6 +97,14 @@ mixin _$ListMoviesController on _ListMoviesControllerBase, Store {
         .run(() => super.getMoviesResultList(genreId, pageNumber));
   }
 
+  final _$fetchMoreMoviesAsyncAction =
+      AsyncAction('_ListMoviesControllerBase.fetchMoreMovies');
+
+  @override
+  Future<dynamic> fetchMoreMovies() {
+    return _$fetchMoreMoviesAsyncAction.run(() => super.fetchMoreMovies());
+  }
+
   final _$_ListMoviesControllerBaseActionController =
       ActionController(name: '_ListMoviesControllerBase');
 
@@ -95,9 +120,21 @@ mixin _$ListMoviesController on _ListMoviesControllerBase, Store {
   }
 
   @override
+  bool thereAreMoreMovies() {
+    final _$actionInfo = _$_ListMoviesControllerBaseActionController
+        .startAction(name: '_ListMoviesControllerBase.thereAreMoreMovies');
+    try {
+      return super.thereAreMoreMovies();
+    } finally {
+      _$_ListMoviesControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 moviesResultList: ${moviesResultList},
+lastDiscoverMoviesApiResponse: ${lastDiscoverMoviesApiResponse},
 failure: ${failure},
 atualState: ${atualState},
 selectedTabBarIndex: ${selectedTabBarIndex}

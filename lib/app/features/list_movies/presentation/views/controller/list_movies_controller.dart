@@ -1,4 +1,6 @@
 import 'package:cubos_test/app/core/functions/getGenreNameById.dart';
+import 'package:cubos_test/app/core/utils/constants.dart';
+import 'package:cubos_test/app/features/list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../../core/errors/failures/failure.dart';
@@ -16,7 +18,10 @@ abstract class _ListMoviesControllerBase with Store {
   _ListMoviesControllerBase({this.getMoviesResults});
 
   @observable
-  List<MovieResults> moviesResultList;
+  ObservableList<MovieResults> moviesResultList;
+
+  @observable
+  DiscoverMoviesApiResponse lastDiscoverMoviesApiResponse;
 
   @observable
   Failure failure;
@@ -43,11 +48,32 @@ abstract class _ListMoviesControllerBase with Store {
           },
         (successResult){
           atualState = ListPageStates.success;
-          moviesResultList = successResult.results;
+          moviesResultList = successResult.results.asObservable();
+          lastDiscoverMoviesApiResponse = successResult;
           });
   }
 
   bool checkForState(ListPageStates stateToCheck) =>  atualState == stateToCheck;
+
+  @action
+  bool thereAreMoreMovies() => lastDiscoverMoviesApiResponse.page < lastDiscoverMoviesApiResponse.totalPages;
+
+  @action 
+  Future fetchMoreMovies() async{
+    if(thereAreMoreMovies()){
+      final moviesResult = await getMoviesResults.call(ACTION_GENRE_ID, lastDiscoverMoviesApiResponse.page + 1);  
+      moviesResult.fold(
+        (errorResult){
+          atualState = ListPageStates.failure;
+          failure = errorResult;
+          },
+        (successResult){
+          atualState = ListPageStates.success;
+          moviesResultList.addAll(successResult.results);
+          lastDiscoverMoviesApiResponse = successResult;
+          });
+    }
+  }
 
   String createGenreString(List<int> genreIds){
     List<String> genresList = genreIds.map((genreId) => getGenreNameById(genreId)).toList();
