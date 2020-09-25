@@ -1,11 +1,12 @@
 import 'package:cubos_test/app/core/functions/getGenreNameById.dart';
 import 'package:cubos_test/app/core/utils/constants.dart';
 import 'package:cubos_test/app/features/list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
+import 'package:cubos_test/app/features/list_movies/domain/usecases/get_movies_results.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../../core/errors/failures/failure.dart';
 import '../../../domain/entities/MovieResults.dart';
-import '../../../domain/usecases/get_movies_results.dart';
+import '../../../domain/usecases/get_movies_results_implementation.dart';
 
 part 'list_movies_controller.g.dart';
 

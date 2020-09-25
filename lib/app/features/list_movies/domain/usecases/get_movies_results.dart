@@ -1,16 +1,9 @@
+import 'package:cubos_test/app/core/errors/failures/failure.dart';
+import 'package:cubos_test/app/features/list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/errors/failures/failure.dart';
-import '../entities/DiscoverMoviesApiResponse.dart';
-import '../repositories/discover_movies_repository.dart';
+abstract class GetMoviesResults{
 
-class GetMoviesResults {
+  Future<Either<Failure, DiscoverMoviesApiResponse>> call (int genreId, int pageNumber);
 
-  final DiscoverMoviesRepository discoverMoviesRepository;
-
-  GetMoviesResults({this.discoverMoviesRepository});
-
-  Future<Either<Failure, DiscoverMoviesApiResponse>> call (int genreId, int pageNumber) async {
-    return await discoverMoviesRepository.getMoviesList(genreId, pageNumber);
-  }
 }

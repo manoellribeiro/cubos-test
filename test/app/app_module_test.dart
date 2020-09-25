@@ -5,6 +5,7 @@ import 'package:cubos_test/app/features/list_movies/data/datasources/discover_mo
 import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_remote_datasource/discover_movies_remote_datasource.dart';
 import 'package:cubos_test/app/features/list_movies/domain/repositories/discover_movies_repository.dart';
 import 'package:cubos_test/app/features/list_movies/domain/usecases/get_movies_results.dart';
+import 'package:cubos_test/app/features/list_movies/domain/usecases/get_movies_results_implementation.dart';
 import 'package:cubos_test/app/features/list_movies/presentation/views/controller/list_movies_controller.dart';
 import 'package:cubos_test/app/features/show_movie_details/data/datasources/movie_details_local_datasource/movie_details_local_datasource.dart';
 import 'package:cubos_test/app/features/show_movie_details/data/datasources/movie_details_remote_datasource/movie_details_remote_datasource.dart';

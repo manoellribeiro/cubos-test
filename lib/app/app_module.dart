@@ -10,7 +10,7 @@ import 'core/utils/constants.dart';
 import 'features/list_movies/data/datasources/discover_movies_local_datasource/discover_movies_local_datasource_implementation.dart';
 import 'features/list_movies/data/datasources/discover_movies_remote_datasource/discover_movies_remote_datasource_implementation.dart';
 import 'features/list_movies/data/repositories/discover_movies_repository_implementation.dart';
-import 'features/list_movies/domain/usecases/get_movies_results.dart';
+import 'features/list_movies/domain/usecases/get_movies_results_implementation.dart';
 import 'features/list_movies/presentation/views/controller/list_movies_controller.dart';
 import 'features/list_movies/presentation/views/list_movies_page.dart';
 import 'features/show_movie_details/data/datasources/movie_details_local_datasource/movie_details_local_datasource_implementation.dart';
@@ -36,7 +36,7 @@ class AppModule extends MainModule {
         localDataSource: Modular.get(),
         networkInfo: Modular.get()
         )),
-      Bind((i) => GetMoviesResults(discoverMoviesRepository: Modular.get())),
+      Bind((i) => GetMoviesResultsImplementation(discoverMoviesRepository: Modular.get())),
       Bind((i) => ListMoviesController(getMoviesResults: Modular.get())),
       
 
