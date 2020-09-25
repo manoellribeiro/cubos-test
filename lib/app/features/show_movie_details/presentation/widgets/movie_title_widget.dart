@@ -10,6 +10,7 @@ class MovieTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title.toUpperCase(),
+      textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.subtitle2.copyWith(fontWeight: FontWeight.w600),
       );
   }
