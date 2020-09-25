@@ -36,12 +36,7 @@ class MovieCard extends StatelessWidget {
           children: [
             Text(movieResult.title, style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
             SizedBox(height: 12),
-            Row(
-              children: [
-                Text("Ação", style: Theme.of(context).textTheme.bodyText2,),
-                Text("Aventura", style: Theme.of(context).textTheme.bodyText2),
-              ],
-            ),
+            Text(controller.createGenreString(movieResult.genreIds), style: Theme.of(context).textTheme.bodyText2,),
             SizedBox(height: 32),
             Text("Erro ao baixar imagem", style: TextStyle(fontSize: 10, color: Colors.red)),
           ],
@@ -52,10 +47,12 @@ class MovieCard extends StatelessWidget {
         onTap: (){
           Modular.to.pushNamed('/showDetails', arguments: {
             'movieId': movieResult.id,
-            'moviePostUrl': '$THE_MOVIE_DB_IMAGE_BASE_URL${movieResult.posterPath}'
+            'moviePosterUrl': '$THE_MOVIE_DB_IMAGE_BASE_URL${movieResult.posterPath}'
           });
         },
-              child: Container(
+              child: Hero(
+                tag: movieResult.id,
+                              child: Container(
         height: SizeConfig.heightMultiplier * 80,
         width: SizeConfig.widthMultiplier * 100,
         margin: EdgeInsets.only(left: 20, right: 20, bottom: 16),      
@@ -71,14 +68,15 @@ class MovieCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(movieResult.title, style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
-              SizedBox(height: 12),
-              Text(controller.createGenreString(movieResult.genreIds), style: Theme.of(context).textTheme.bodyText2,),
-              SizedBox(height: 32)
+                Text(movieResult.title, style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
+                SizedBox(height: 12),
+                Text(controller.createGenreString(movieResult.genreIds), style: Theme.of(context).textTheme.bodyText2,),
+                SizedBox(height: 32)
             ],
           ),
         ),
     ),
+              ),
       ),
     );
   }

@@ -11,7 +11,7 @@ class MovieDetailsLocalDataSourceImplementation implements MovieDetailsLocalData
 
   _initHive() async {
     await Hive.initFlutter();
-    final box = await Hive.openBox('discoverMovies');
+    final box = await Hive.openBox('movieDetails');
     completer.complete(box);
   }
 

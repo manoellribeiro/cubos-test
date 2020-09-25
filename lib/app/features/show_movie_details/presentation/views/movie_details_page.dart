@@ -1,5 +1,6 @@
 import 'package:cubos_test/app/core/configs/size_config.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/views/controller/movie_details_controller.dart';
+import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_poster_card_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/return_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -46,7 +47,12 @@ class _MovieDetailsPageState extends ModularState<MovieDetailsPage, MovieDetails
           SizedBox(height: SizeConfig.heightMultiplier * 7),
           Align(
             alignment: Alignment.centerLeft,
-            child: ReturnButton())
+            child: ReturnButton()),
+          SizedBox(height: SizeConfig.heightMultiplier * 8,),
+          MoviePosterCard(
+            movieId: widget.arguments['movieId'],
+            posterUrl: widget.arguments['moviePosterUrl'],
+          )  
         ]
       ),
     );
