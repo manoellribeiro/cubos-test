@@ -28,7 +28,7 @@ class AppModule extends MainModule {
       Bind((i) => Connectivity()),
       Bind((i) => NetworkInfoImplementation(connectivity: Modular.get())),
 
-      //Featura - List Movies
+      //Feature - List Movies
       Bind((i) => DiscoverMoviesRemoteDataSourceImplementation(dio: Modular.get())),
       Bind((i) => DiscoverMoviesLocalDataSourceImplementation()),
       Bind((i) => DiscoverMoviesRepositoryImplementation(
