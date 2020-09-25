@@ -13,6 +13,7 @@ import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_title_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/return_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hive/hive.dart';
 
@@ -35,103 +36,117 @@ class _MovieDetailsPageState
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        width: SizeConfig.widthMultiplier * 100,
-        decoration: BoxDecoration(
-            color: Colors.red,
-            gradient: LinearGradient(colors: [
-              Theme.of(context).backgroundColor,
-              Theme.of(context).backgroundColor,
-              Theme.of(context).scaffoldBackgroundColor,
-              Theme.of(context).scaffoldBackgroundColor
-            ], stops: [
-              0.0,
-              0.22,
-              0.22,
-              1
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(children: [
-            SizedBox(height: SizeConfig.heightMultiplier * 7),
-            Align(alignment: Alignment.centerLeft, child: ReturnButton()),
-            SizedBox(
-              height: SizeConfig.heightMultiplier * 8,
-            ),
-            MoviePosterCard(
-              movieId: widget.arguments['movieId'],
-              posterUrl: widget.arguments['moviePosterUrl'],
-            ),
-            SizedBox(
-              height: SizeConfig.heightMultiplier * 5,
-            ),
-            MovieScore(score: controller.movieDetails.voteAverage),
-            SizedBox(
-              height: SizeConfig.heightMultiplier * 6,
-            ),
-            MovieTitle(
-              title: controller.movieDetails.title,
-            ),
-            SizedBox(
-              height: SizeConfig.heightMultiplier * 3,
-            ),
-            MovieOriginalTitle(
-                originalTitle: controller.movieDetails.originalTitle),
-            SizedBox(
-              height: SizeConfig.heightMultiplier * 3,
-            ),
-            Wrap(
-              spacing: 12,
-              children: [
-                InfoBox(
-                  shouldExpand: false,
-                  infoName: "Ano",
-                  infoValue: getYearFromReleaseDate(
-                      controller.movieDetails.releaseDate),
-                ),
-                InfoBox(
-                  shouldExpand: false,
-                  infoName: "Duração",
-                  infoValue:
-                      formatMovieRuntime(controller.movieDetails.runtime),
-                ),
-              ],
-            ),
-            SizedBox(height: SizeConfig.heightMultiplier * 2.5),
-            GenreBoxWrap(genres: controller.movieDetails.genres),
-            SizedBox(
-              height: SizeConfig.heightMultiplier * 8,
-            ),
-            MovieDetails(
-                detailType: "Descrição",
-                detailValue: controller.movieDetails.overview),
-            SizedBox(height: SizeConfig.heightMultiplier * 4),
-            InfoBox(
-                shouldExpand: true,
-                infoName: "ORÇAMENTO",
-                infoValue:
-                    '\$ ${formatMoneyValueToDolar(controller.movieDetails.budget)}'),
-            SizedBox(height: SizeConfig.heightMultiplier * 1),
-            InfoBox(
-                shouldExpand: true,
-                infoName: "PRODUTORAS",
-                infoValue: controller.createProductionCompanyString(
-                    controller.movieDetails.productionCompanies)),
-            SizedBox(height: SizeConfig.heightMultiplier * 5),
-            MovieDetails(
-              detailType: "Diretor",
-              detailValue: controller
-                  .getDirectorsString(controller.movieDetails.credits.crew),
-            ),
-            SizedBox(height: SizeConfig.heightMultiplier * 5),
-            MovieDetails(
-              detailType: "Elenco",
-              detailValue: controller
-                  .getCastString(controller.movieDetails.credits.cast),
-            ),
-            SizedBox(height: SizeConfig.heightMultiplier * 5),
-          ]),
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+          body: SingleChildScrollView(
+        child: Container(
+          width: SizeConfig.widthMultiplier * 100,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Theme.of(context).backgroundColor,
+                Theme.of(context).backgroundColor,
+                Theme.of(context).scaffoldBackgroundColor,
+                Theme.of(context).scaffoldBackgroundColor
+              ], stops: [
+                0.0,
+                0.22,
+                0.22,
+                1
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(children: [
+              SizedBox(height: SizeConfig.heightMultiplier * 7),
+              Align(alignment: Alignment.centerLeft, child: ReturnButton()),
+              SizedBox(
+                height: SizeConfig.heightMultiplier * 8,
+              ),
+              MoviePosterCard(
+                movieId: widget.arguments['movieId'],
+                posterUrl: widget.arguments['moviePosterUrl'],
+              ),
+              SizedBox(
+                height: SizeConfig.heightMultiplier * 5,
+              ),
+              Observer(builder: (_) {
+                if(controller.checkForState(MovieDetailsPageState.loading)) return CircularProgressIndicator();
+                if(controller.checkForState(MovieDetailsPageState.failure)) return Text(controller.failure.message);
+                if(controller.checkForState(MovieDetailsPageState.success)) {
+                  return Flex(
+                  direction: Axis.vertical,
+                  children: [
+                    MovieScore(score: controller.movieDetails.voteAverage),
+                    SizedBox(
+                      height: SizeConfig.heightMultiplier * 6,
+                    ),
+                    MovieTitle(
+                      title: controller.movieDetails.title,
+                    ),
+                    SizedBox(
+                      height: SizeConfig.heightMultiplier * 3,
+                    ),
+                    MovieOriginalTitle(
+                        originalTitle: controller.movieDetails.originalTitle),
+                    SizedBox(
+                      height: SizeConfig.heightMultiplier * 3,
+                    ),
+                    Wrap(
+                      spacing: 12,
+                      children: [
+                        InfoBox(
+                          shouldExpand: false,
+                          infoName: "Ano",
+                          infoValue: getYearFromReleaseDate(
+                              controller.movieDetails.releaseDate),
+                        ),
+                        InfoBox(
+                          shouldExpand: false,
+                          infoName: "Duração",
+                          infoValue:
+                              formatMovieRuntime(controller.movieDetails.runtime),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: SizeConfig.heightMultiplier * 2.5),
+                    GenreBoxWrap(genres: controller.movieDetails.genres),
+                    SizedBox(
+                      height: SizeConfig.heightMultiplier * 8,
+                    ),
+                    MovieDetails(
+                        detailType: "Descrição",
+                        detailValue: controller.movieDetails.overview),
+                    SizedBox(height: SizeConfig.heightMultiplier * 4),
+                    InfoBox(
+                        shouldExpand: true,
+                        infoName: "ORÇAMENTO",
+                        infoValue:
+                            '\$ ${formatMoneyValueToDolar(controller.movieDetails.budget)}'),
+                    SizedBox(height: SizeConfig.heightMultiplier * 1),
+                    InfoBox(
+                        shouldExpand: true,
+                        infoName: "PRODUTORAS",
+                        infoValue: controller.createProductionCompanyString(
+                            controller.movieDetails.productionCompanies)),
+                    SizedBox(height: SizeConfig.heightMultiplier * 5),
+                    MovieDetails(
+                      detailType: "Direção",
+                      detailValue: controller.getDirectorsString(
+                          controller.movieDetails.credits.crew),
+                    ),
+                    SizedBox(height: SizeConfig.heightMultiplier * 5),
+                    MovieDetails(
+                      detailType: "Elenco",
+                      detailValue: controller
+                          .getCastString(controller.movieDetails.credits.cast),
+                    ),
+                  ],
+                );
+                }
+                return Container();
+              }),
+              SizedBox(height: SizeConfig.heightMultiplier * 5),
+            ]),
+          ),
         ),
       ),
     );

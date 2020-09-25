@@ -59,6 +59,8 @@ abstract class _MovieDetailsControllerBase with Store {
     return castString;
   }
 
+  bool checkForState(MovieDetailsPageState stateToCheck) =>  atualState == stateToCheck;
+
 }
 
 enum MovieDetailsPageState {
