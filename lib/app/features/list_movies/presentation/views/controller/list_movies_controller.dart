@@ -61,7 +61,7 @@ abstract class _ListMoviesControllerBase with Store {
   @action 
   Future fetchMoreMovies() async{
     if(thereAreMoreMovies()){
-      final moviesResult = await getMoviesResults.call(ACTION_GENRE_ID, lastDiscoverMoviesApiResponse.page + 1);  
+      final moviesResult = await getMoviesResults.call(chooseGenreIdByTabBarIndex(selectedTabBarIndex), lastDiscoverMoviesApiResponse.page + 1);  
       moviesResult.fold(
         (errorResult){
           atualState = ListPageStates.failure;
@@ -72,6 +72,24 @@ abstract class _ListMoviesControllerBase with Store {
           moviesResultList.addAll(successResult.results);
           lastDiscoverMoviesApiResponse = successResult;
           });
+    }
+  }
+
+  chooseGenreIdByTabBarIndex(int tabBarIndex){
+    switch (tabBarIndex) {
+      case 0:
+        return ACTION_GENRE_ID;
+        break;
+      case 1:
+        return ADVENTURE_GENRE_ID;
+        break;
+      case 2:
+        return FANTASY_GENRE_ID;
+        break;
+      case 3:
+        return COMEDY_GENRE_ID;
+        break;
+      default:
     }
   }
 

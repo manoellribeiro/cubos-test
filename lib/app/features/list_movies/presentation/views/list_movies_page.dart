@@ -16,8 +16,19 @@ class ListMoviesPage extends StatefulWidget {
 
 class _ListMoviesPageState
     extends ModularState<ListMoviesPage, ListMoviesController> {
+  
+  ScrollController scrollController;
+  
   @override
   void initState() {
+    scrollController = ScrollController()..addListener(() {
+      bool isScrollAtEdge = scrollController.position.atEdge;
+      bool isScrollNotOnTop = scrollController.position.pixels != 0.0;
+      bool isScrollOnBottom = isScrollAtEdge && isScrollNotOnTop; 
+      if(isScrollOnBottom) {
+        controller.fetchMoreMovies();
+      }
+    });
     controller
         .getMoviesResultList(ACTION_GENRE_ID, 1);
     super.initState();
@@ -49,6 +60,7 @@ class _ListMoviesPageState
                         return Center(child: CircularProgressIndicator());
                       if (controller.checkForState(ListPageStates.success))
                         return MoviesListView(
+                          scrollController: scrollController,
                           moviesResults: controller.moviesResultList,
                         );
                       if (controller.checkForState(ListPageStates.failure)) return Center(child: Text(controller.failure.message, style: TextStyle(color: Colors.black),));

@@ -9,14 +9,16 @@ import 'movie_card_widget.dart';
 
 class MoviesListView extends StatelessWidget {
   final List<MovieResults> moviesResults;
+  ScrollController scrollController;
 
-  MoviesListView({Key key, this.moviesResults}) : super(key: key);
+  MoviesListView({Key key, this.moviesResults, this.scrollController}) : super(key: key);
 
   ListMoviesController controller = Modular.get();
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        controller: scrollController,
         shrinkWrap: true,
         itemCount: moviesResults.length + 1,
         itemBuilder: (context, index) {
