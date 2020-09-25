@@ -3,7 +3,7 @@ import 'package:cubos_test/app/core/functions/formatMovieRuntime.dart';
 import 'package:cubos_test/app/core/functions/getYearFromReleaseDate.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/views/controller/movie_details_controller.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/genre_box_widget.dart';
-import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/genre_box_wrap.dart';
+import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/genre_box_wrap_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/info_box_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_original_title_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_poster_card_widget.dart';

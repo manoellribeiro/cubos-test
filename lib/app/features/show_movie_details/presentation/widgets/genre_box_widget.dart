@@ -9,8 +9,10 @@ class GenreBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      borderRadius: BorderRadius.circular(5),
           child: Container(
         decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: Color(0xffE9ECEF))
         ),
