@@ -4,6 +4,7 @@ import 'package:cubos_test/app/features/show_movie_details/domain/entities/Crew.
 import 'package:cubos_test/app/features/show_movie_details/domain/entities/MovieDetails.dart';
 import 'package:cubos_test/app/features/show_movie_details/domain/entities/ProductionCompany.dart';
 import 'package:cubos_test/app/features/show_movie_details/domain/usecases/get_movie_details.dart';
+import 'package:cubos_test/app/features/show_movie_details/domain/usecases/get_movie_details_implementation.dart';
 import 'package:mobx/mobx.dart';
 part 'movie_details_controller.g.dart';
 

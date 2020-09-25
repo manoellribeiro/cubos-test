@@ -202,9 +202,7 @@ void main() {
   });
 
   group("Pagination", () {
-    test(
-        "thereAreMoreMovies returns the expected value",
-        () async {
+    test("thereAreMoreMovies returns the expected value", () async {
       // arrange
       final Map<String, dynamic> jsonMap =
           json.decode(fixture('discover_movies_api_response.json'));
@@ -217,12 +215,9 @@ void main() {
       // act
       await listMoviesController.getMoviesResultList(28, 1);
       //assert
-      expect(listMoviesController.thereAreMoreMovies(),
-          true);
+      expect(listMoviesController.thereAreMoreMovies(), true);
     });
-    test(
-        "fetchMoreMovies add values to moviesResultList",
-        () async {
+    test("fetchMoreMovies add values to moviesResultList", () async {
       // arrange
       final Map<String, dynamic> jsonMap =
           json.decode(fixture('discover_movies_api_response.json'));
@@ -234,9 +229,11 @@ void main() {
           .thenAnswer((_) async => Right(discoverMoviesApiResponse));
       // act
       await listMoviesController.getMoviesResultList(28, 1);
-      final moviesResultsListLengthBeforeFetchMoreMovies = listMoviesController.moviesResultList.length;
+      final moviesResultsListLengthBeforeFetchMoreMovies =
+          listMoviesController.moviesResultList.length;
       await listMoviesController.fetchMoreMovies();
-      final moviesResultsListLengthAfterFetchMoreMovies = listMoviesController.moviesResultList.length;
+      final moviesResultsListLengthAfterFetchMoreMovies =
+          listMoviesController.moviesResultList.length;
 
       //assert
       expect(moviesResultsListLengthBeforeFetchMoreMovies,

@@ -16,7 +16,7 @@ import 'features/list_movies/presentation/views/list_movies_page.dart';
 import 'features/show_movie_details/data/datasources/movie_details_local_datasource/movie_details_local_datasource_implementation.dart';
 import 'features/show_movie_details/data/datasources/movie_details_remote_datasource/movie_details_remote_datasource_implementation.dart';
 import 'features/show_movie_details/data/repositories/movie_details_repository_implementation.dart';
-import 'features/show_movie_details/domain/usecases/get_movie_details.dart';
+import 'features/show_movie_details/domain/usecases/get_movie_details_implementation.dart';
 import 'features/show_movie_details/presentation/views/controller/movie_details_controller.dart';
 
 class AppModule extends MainModule {
@@ -48,7 +48,7 @@ class AppModule extends MainModule {
         localDataSource: Modular.get(),
         networkInfo: Modular.get()
         )),
-      Bind((i) => GetMovieDetails(movieDetailsRepository: Modular.get())),
+      Bind((i) => GetMovieDetailsImplementation(movieDetailsRepository: Modular.get())),
       Bind((i) => MovieDetailsController(getMovieDetails: Modular.get())),
 
     ];

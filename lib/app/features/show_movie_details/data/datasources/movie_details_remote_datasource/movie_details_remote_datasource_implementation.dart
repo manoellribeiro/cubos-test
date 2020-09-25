@@ -1,6 +1,6 @@
 import 'package:cubos_test/app/features/show_movie_details/data/datasources/movie_details_remote_datasource/movie_details_remote_datasource.dart';
 import 'package:cubos_test/app/features/show_movie_details/domain/entities/MovieDetails.dart';
-import 'package:cubos_test/app/features/show_movie_details/domain/usecases/get_movie_details.dart';
+import 'package:cubos_test/app/features/show_movie_details/domain/usecases/get_movie_details_implementation.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../../core/errors/exceptions/server_exception.dart';
