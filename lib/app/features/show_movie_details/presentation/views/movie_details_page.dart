@@ -6,6 +6,7 @@ import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/genre_box_wrap_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/info_box_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_original_title_widget.dart';
+import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_overview_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_poster_card_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_score_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_title_widget.dart';
@@ -50,29 +51,29 @@ class _MovieDetailsPageState extends ModularState<MovieDetailsPage, MovieDetails
             end: Alignment.bottomCenter
           )
         ),
-        child: Column(
-          children: [
-            SizedBox(height: SizeConfig.heightMultiplier * 7),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: ReturnButton()),
-            SizedBox(height: SizeConfig.heightMultiplier * 8,),
-            MoviePosterCard(
-              movieId: widget.arguments['movieId'],
-              posterUrl: widget.arguments['moviePosterUrl'],
-            ),
-            SizedBox(height: SizeConfig.heightMultiplier * 5,),
-            MovieScore(
-              score: controller.movieDetails.voteAverage
-            ),
-            SizedBox(height: SizeConfig.heightMultiplier * 6,),
-            MovieTitle(title: controller.movieDetails.title,),
-            SizedBox(height: SizeConfig.heightMultiplier * 3,),
-            MovieOriginalTitle(originalTitle: controller.movieDetails.originalTitle),
-            SizedBox(height: SizeConfig.heightMultiplier * 3,),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier * 3),
-              child: Row(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              SizedBox(height: SizeConfig.heightMultiplier * 7),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: ReturnButton()),
+              SizedBox(height: SizeConfig.heightMultiplier * 8,),
+              MoviePosterCard(
+                movieId: widget.arguments['movieId'],
+                posterUrl: widget.arguments['moviePosterUrl'],
+              ),
+              SizedBox(height: SizeConfig.heightMultiplier * 5,),
+              MovieScore(
+                score: controller.movieDetails.voteAverage
+              ),
+              SizedBox(height: SizeConfig.heightMultiplier * 6,),
+              MovieTitle(title: controller.movieDetails.title,),
+              SizedBox(height: SizeConfig.heightMultiplier * 3,),
+              MovieOriginalTitle(originalTitle: controller.movieDetails.originalTitle),
+              SizedBox(height: SizeConfig.heightMultiplier * 3,),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   InfoBox(
@@ -85,13 +86,12 @@ class _MovieDetailsPageState extends ModularState<MovieDetailsPage, MovieDetails
                   ),
                 ],
               ),
-            ),
-            SizedBox(height: SizeConfig.heightMultiplier * 2.5),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier * 3),
-              child: GenreBoxWrap(genres: controller.movieDetails.genres),
-            )
-          ]
+              SizedBox(height: SizeConfig.heightMultiplier * 2.5),
+              GenreBoxWrap(genres: controller.movieDetails.genres),
+              SizedBox(height: SizeConfig.heightMultiplier * 8,),
+              MovieOverview(overview: controller.movieDetails.overview)
+            ]
+          ),
         ),
       ),
     );
