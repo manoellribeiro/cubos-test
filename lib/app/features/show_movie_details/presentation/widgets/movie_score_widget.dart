@@ -11,8 +11,8 @@ class MovieScore extends StatelessWidget {
     return RichText(
       text: TextSpan(
         children: [
-          TextSpan(text: '$score', style: TextStyle(fontSize: 24, color: Theme.of(context).accentColor)),
-          TextSpan(text: ' /10', style: TextStyle(fontSize: 14, color: Color(0xff868E96)))
+          TextSpan(text: '$score', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24, color: Theme.of(context).accentColor)),
+          TextSpan(text: ' /10', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14, color: Color(0xff868E96)))
         ]
       ),
     );
