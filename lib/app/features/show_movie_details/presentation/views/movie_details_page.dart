@@ -1,4 +1,5 @@
 import 'package:cubos_test/app/core/configs/size_config.dart';
+import 'package:cubos_test/app/core/functions/formatMoneyValueToDollar.dart';
 import 'package:cubos_test/app/core/functions/formatMovieRuntime.dart';
 import 'package:cubos_test/app/core/functions/getYearFromReleaseDate.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/views/controller/movie_details_controller.dart';
@@ -73,14 +74,16 @@ class _MovieDetailsPageState extends ModularState<MovieDetailsPage, MovieDetails
               SizedBox(height: SizeConfig.heightMultiplier * 3,),
               MovieOriginalTitle(originalTitle: controller.movieDetails.originalTitle),
               SizedBox(height: SizeConfig.heightMultiplier * 3,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Wrap(
+                spacing: 12,
                 children: [
                   InfoBox(
+                    shouldExpand: false,
                     infoName: "Ano",
                     infoValue: getYearFromReleaseDate(controller.movieDetails.releaseDate),
                   ),
                   InfoBox(
+                    shouldExpand: false,
                     infoName: "Duração",
                     infoValue: formatMovieRuntime(controller.movieDetails.runtime),
                   ),
@@ -89,7 +92,17 @@ class _MovieDetailsPageState extends ModularState<MovieDetailsPage, MovieDetails
               SizedBox(height: SizeConfig.heightMultiplier * 2.5),
               GenreBoxWrap(genres: controller.movieDetails.genres),
               SizedBox(height: SizeConfig.heightMultiplier * 8,),
-              MovieOverview(overview: controller.movieDetails.overview)
+              MovieOverview(overview: controller.movieDetails.overview),
+              SizedBox(height: SizeConfig.heightMultiplier * 4),
+              InfoBox(
+                shouldExpand: true,
+                infoName: "ORÇAMENTO",
+                infoValue: '\$ ${formatMoneyValueToDolar(controller.movieDetails.budget)}'),
+              SizedBox(height: SizeConfig.heightMultiplier * 1),
+              InfoBox(
+                shouldExpand: true,
+                infoName: "PRODUTORAS",
+                infoValue: controller.createProductionCompanyString(controller.movieDetails.productionCompanies)),
             ]
           ),
         ),

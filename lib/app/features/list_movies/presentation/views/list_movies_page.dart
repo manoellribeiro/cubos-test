@@ -19,7 +19,7 @@ class _ListMoviesPageState
   @override
   void initState() {
     controller
-        .getMoviesResultList(28, 1);
+        .getMoviesResultList(ACTION_GENRE_ID, 1);
     super.initState();
   }
 
