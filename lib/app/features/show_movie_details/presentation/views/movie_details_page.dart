@@ -70,7 +70,7 @@ class _MovieDetailsPageState
               ),
               Observer(builder: (_) {
                 if(controller.checkForState(MovieDetailsPageState.loading)) return CircularProgressIndicator();
-                if(controller.checkForState(MovieDetailsPageState.failure)) return Text(controller.failure.message);
+                if(controller.checkForState(MovieDetailsPageState.failure)) return Text(controller.failure.message, style: TextStyle(color: Colors.black),);
                 if(controller.checkForState(MovieDetailsPageState.success)) {
                   return Flex(
                   direction: Axis.vertical,

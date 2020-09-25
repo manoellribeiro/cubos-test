@@ -26,7 +26,7 @@ class MovieDetailsRemoteDataSourceImplementation implements MovieDetailsRemoteDa
            "append_to_response": 'credits'
          }
          );
-        return MovieDetails.fromJson(response.data);  
+        return MovieDetails.fromJson(response.data); 
     } catch (e) {
       throw ServerException();
     }
