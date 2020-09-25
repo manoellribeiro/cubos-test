@@ -61,7 +61,6 @@ class _ListMoviesPageState
                       if (controller.checkForState(ListPageStates.success))
                         return MoviesListView(
                           scrollController: scrollController,
-                          moviesResults: controller.moviesResultList,
                         );
                       if (controller.checkForState(ListPageStates.failure)) return Center(child: Text(controller.failure.message, style: TextStyle(color: Colors.black),));
                       return Container(child: Center(child: Text("Failure")));
@@ -107,6 +106,7 @@ class _ListMoviesPageState
                         height: SizeConfig.heightMultiplier * 3,
                       ),
                       RoundedSearchTextField(
+                        onChanged: controller.setFilter,
                         labelText: "Pesquise filmes",
                         prefixIcon: Icons.search,
                         textInputType: TextInputType.text,

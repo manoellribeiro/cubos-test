@@ -9,6 +9,15 @@ part of 'list_movies_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ListMoviesController on _ListMoviesControllerBase, Store {
+  Computed<List<MovieResults>> _$moviesResultListFilteredComputed;
+
+  @override
+  List<MovieResults> get moviesResultListFiltered =>
+      (_$moviesResultListFilteredComputed ??= Computed<List<MovieResults>>(
+              () => super.moviesResultListFiltered,
+              name: '_ListMoviesControllerBase.moviesResultListFiltered'))
+          .value;
+
   final _$moviesResultListAtom =
       Atom(name: '_ListMoviesControllerBase.moviesResultList');
 
@@ -88,6 +97,22 @@ mixin _$ListMoviesController on _ListMoviesControllerBase, Store {
     });
   }
 
+  final _$movieTitleFilterAtom =
+      Atom(name: '_ListMoviesControllerBase.movieTitleFilter');
+
+  @override
+  String get movieTitleFilter {
+    _$movieTitleFilterAtom.reportRead();
+    return super.movieTitleFilter;
+  }
+
+  @override
+  set movieTitleFilter(String value) {
+    _$movieTitleFilterAtom.reportWrite(value, super.movieTitleFilter, () {
+      super.movieTitleFilter = value;
+    });
+  }
+
   final _$getMoviesResultListAsyncAction =
       AsyncAction('_ListMoviesControllerBase.getMoviesResultList');
 
@@ -137,7 +162,9 @@ moviesResultList: ${moviesResultList},
 lastDiscoverMoviesApiResponse: ${lastDiscoverMoviesApiResponse},
 failure: ${failure},
 atualState: ${atualState},
-selectedTabBarIndex: ${selectedTabBarIndex}
+selectedTabBarIndex: ${selectedTabBarIndex},
+movieTitleFilter: ${movieTitleFilter},
+moviesResultListFiltered: ${moviesResultListFiltered}
     ''';
   }
 }

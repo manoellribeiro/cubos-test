@@ -32,6 +32,9 @@ abstract class _ListMoviesControllerBase with Store {
   @observable
   int selectedTabBarIndex = 0;
 
+  @observable
+  String movieTitleFilter = '';
+
   @action
   void setSelectedTabBarIndex(int value) => selectedTabBarIndex = value; 
 
@@ -75,7 +78,7 @@ abstract class _ListMoviesControllerBase with Store {
     }
   }
 
-  chooseGenreIdByTabBarIndex(int tabBarIndex){
+  int chooseGenreIdByTabBarIndex(int tabBarIndex){
     switch (tabBarIndex) {
       case 0:
         return ACTION_GENRE_ID;
@@ -90,6 +93,18 @@ abstract class _ListMoviesControllerBase with Store {
         return COMEDY_GENRE_ID;
         break;
       default:
+        return ACTION_GENRE_ID;
+    }
+  }
+
+  setFilter(String value) => movieTitleFilter = value;
+
+  @computed
+  List<MovieResults> get moviesResultListFiltered {
+    if(movieTitleFilter.isEmpty){
+      return moviesResultList;
+    } else {
+      return moviesResultList.where((movieResult) => movieResult.title.toLowerCase().contains(movieTitleFilter.toLowerCase())).toList();
     }
   }
 
