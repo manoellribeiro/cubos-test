@@ -1,5 +1,6 @@
 import 'package:cubos_test/app/core/configs/size_config.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/views/controller/movie_details_controller.dart';
+import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_original_title_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_poster_card_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_score_widget.dart';
 import 'package:cubos_test/app/features/show_movie_details/presentation/widgets/movie_title_widget.dart';
@@ -61,8 +62,8 @@ class _MovieDetailsPageState extends ModularState<MovieDetailsPage, MovieDetails
           ),
           SizedBox(height: SizeConfig.heightMultiplier * 6,),
           MovieTitle(title: controller.movieDetails.title,),
-          SizedBox(height: SizeConfig.heightMultiplier * 3,)
-          
+          SizedBox(height: SizeConfig.heightMultiplier * 3,),
+          MovieOriginalTitle(originalTitle: controller.movieDetails.originalTitle)
         ]
       ),
     );
