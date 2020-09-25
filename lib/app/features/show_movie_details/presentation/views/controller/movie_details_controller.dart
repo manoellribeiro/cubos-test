@@ -1,4 +1,5 @@
 import 'package:cubos_test/app/core/errors/failures/failure.dart';
+import 'package:cubos_test/app/features/show_movie_details/domain/entities/Cast.dart';
 import 'package:cubos_test/app/features/show_movie_details/domain/entities/Crew.dart';
 import 'package:cubos_test/app/features/show_movie_details/domain/entities/MovieDetails.dart';
 import 'package:cubos_test/app/features/show_movie_details/domain/entities/ProductionCompany.dart';
@@ -50,6 +51,12 @@ abstract class _MovieDetailsControllerBase with Store {
     List<String> directorNames = onlyDirectorsList.map((director) => director.name).toList();
     String directorsString = directorNames.join(', ');
     return directorsString;
+  }
+
+  String getCastString(List<Cast> cast){
+    List<String> castNames = cast.map((castMember) => castMember.name).toList();
+    String castString = castNames.join(', ');
+    return castString;
   }
 
 }

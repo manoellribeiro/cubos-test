@@ -47,8 +47,8 @@ class _MovieDetailsPageState
               Theme.of(context).scaffoldBackgroundColor
             ], stops: [
               0.0,
-              0.4,
-              0.4,
+              0.22,
+              0.22,
               1
             ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: Padding(
@@ -121,8 +121,16 @@ class _MovieDetailsPageState
             SizedBox(height: SizeConfig.heightMultiplier * 5),
             MovieDetails(
               detailType: "Diretor",
-              detailValue: controller.getDirectorsString(controller.movieDetails.credits.crew),
-            )
+              detailValue: controller
+                  .getDirectorsString(controller.movieDetails.credits.crew),
+            ),
+            SizedBox(height: SizeConfig.heightMultiplier * 5),
+            MovieDetails(
+              detailType: "Elenco",
+              detailValue: controller
+                  .getCastString(controller.movieDetails.credits.cast),
+            ),
+            SizedBox(height: SizeConfig.heightMultiplier * 5),
           ]),
         ),
       ),
