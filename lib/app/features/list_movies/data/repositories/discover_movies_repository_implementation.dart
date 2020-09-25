@@ -37,10 +37,9 @@ class DiscoverMoviesRepositoryImplementation implements DiscoverMoviesRepository
     } else {
       try {
         DiscoverMoviesApiResponse discoverMoviesApiResponse = await localDataSource.getLastDiscoverMoviesApiResponse(genreId);
-        //TODO: Check for the first call
         return Right(discoverMoviesApiResponse);
       } on CacheException {
-        return Left(CacheFailure(message: "Error ao buscar dados locais."));
+        return Left(CacheFailure(message: "Erro ao buscar dados locais."));
       }
     }
   }

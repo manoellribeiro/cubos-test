@@ -1,13 +1,14 @@
 import 'dart:async';
 
+import 'package:cubos_test/app/core/errors/exceptions/cache_exception.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../domain/entities/DiscoverMoviesApiResponse.dart';
 import 'discover_movies_local_datasource.dart';
 
-class DiscoverMoviesLocalDataSourceImplementation implements DiscoverMoviesLocalDataSource {
-  
+class DiscoverMoviesLocalDataSourceImplementation
+    implements DiscoverMoviesLocalDataSource {
   Completer<Box> completer = Completer<Box>();
 
   _initHive() async {
@@ -17,17 +18,25 @@ class DiscoverMoviesLocalDataSourceImplementation implements DiscoverMoviesLocal
   }
 
   @override
-  Future<DiscoverMoviesApiResponse> getLastDiscoverMoviesApiResponse(int genreId) async {
-    if(!completer.isCompleted){
+  Future<DiscoverMoviesApiResponse> getLastDiscoverMoviesApiResponse(
+      int genreId) async {
+    if (!completer.isCompleted) {
       await _initHive();
     }
-    Box box = await completer.future;
-    return DiscoverMoviesApiResponse.fromJson(box.get(genreId, defaultValue: "There's no data stored"));
+    try {
+      Box box = await completer.future;
+      return DiscoverMoviesApiResponse.fromJson(
+          box.get(genreId, defaultValue: "There's no data stored"));
+    } catch (e) {
+      throw CacheException();
+    }
   }
-  
+
   @override
-  Future storeLastDiscoverMoviesApiResponse(DiscoverMoviesApiResponse lastDiscoverMoviesApiResponse, int genreId) async {
-    if(!completer.isCompleted){
+  Future storeLastDiscoverMoviesApiResponse(
+      DiscoverMoviesApiResponse lastDiscoverMoviesApiResponse,
+      int genreId) async {
+    if (!completer.isCompleted) {
       await _initHive();
     }
     Box box = await completer.future;

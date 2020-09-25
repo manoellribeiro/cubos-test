@@ -35,10 +35,9 @@ class MovieDetailsRepositoryImplementation implements MovieDetailsRepository {
     } else {
       try {
         MovieDetails movieDetails = await localDataSource.getMovieDetails(movieId);
-        //TODO: Check for the first call
         return Right(movieDetails);
       } on CacheException {
-        return Left(CacheFailure(message: "Error ao buscar dados locais."));
+        return Left(CacheFailure(message: "Erro ao buscar dados locais."));
       }
     }
   }

@@ -7,7 +7,7 @@ class Cast {
       this.name,
       });
 
-  Cast.fromJson(Map<String, dynamic> json) {
+  Cast.fromJson(Map<dynamic, dynamic> json) {
     name = json['name'];
   }
 

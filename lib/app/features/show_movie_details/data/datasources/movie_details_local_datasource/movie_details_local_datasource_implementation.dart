@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cubos_test/app/core/errors/exceptions/cache_exception.dart';
 import 'package:cubos_test/app/features/show_movie_details/data/datasources/movie_details_local_datasource/movie_details_local_datasource.dart';
 import 'package:cubos_test/app/features/show_movie_details/domain/entities/MovieDetails.dart';
 import 'package:hive/hive.dart';
@@ -20,8 +21,12 @@ class MovieDetailsLocalDataSourceImplementation implements MovieDetailsLocalData
     if(!completer.isCompleted){
       await _initHive();
     }
-    Box box = await completer.future;
-    return MovieDetails.fromJson(box.get(movieId, defaultValue: "There's no data stored"));
+    try {
+      Box box = await completer.future;
+      return MovieDetails.fromJson(box.get(movieId, defaultValue: "There's no data stored"));  
+    } catch (e) {
+      throw CacheException();
+    }
   }
   
   @override
