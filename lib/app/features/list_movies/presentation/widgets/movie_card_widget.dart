@@ -59,7 +59,7 @@ class MovieCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           image: DecorationImage(
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.cover,
             image: imageProvider)
         ),
         child: Padding(
