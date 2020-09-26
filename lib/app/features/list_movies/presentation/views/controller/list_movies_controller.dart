@@ -101,6 +101,11 @@ abstract class _ListMoviesControllerBase with Store {
   setFilter(String value) => movieTitleFilter = value;
 
   @computed
+  bool get isFiltering {
+    return movieTitleFilter.isNotEmpty;
+  }
+
+  @computed
   List<MovieResults> get moviesResultListFiltered {
     if(movieTitleFilter.isEmpty){
       return moviesResultList;

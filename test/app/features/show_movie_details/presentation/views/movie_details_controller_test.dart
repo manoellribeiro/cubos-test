@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'dart:convert';
 
-import '../../../../../fixtures/movie_details.dart';
+import '../../../../../json/movie_details.dart';
 
 class GetMovieDetailsMock extends Mock implements GetMovieDetails {}
 

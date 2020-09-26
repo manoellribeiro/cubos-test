@@ -12,7 +12,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../../fixtures/discover_movies_api_response.dart';
+import '../../../../../json/discover_movies_api_response.dart';
 
 
 class DiscoverMovieRemoteDataSourceMock extends Mock

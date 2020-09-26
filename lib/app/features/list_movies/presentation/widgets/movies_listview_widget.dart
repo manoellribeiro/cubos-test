@@ -18,6 +18,14 @@ class MoviesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_){
+
+      if(controller.moviesResultListFiltered.isEmpty){
+        return Center(child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Text("Nenhum filme encontrado na listagem atual com esse nome", textAlign: TextAlign.center ,style: TextStyle(color: Colors.black),),
+        ));
+      }
+
       return ListView.builder(
         controller: scrollController,
         shrinkWrap: true,
@@ -25,12 +33,16 @@ class MoviesListView extends StatelessWidget {
         itemBuilder: (context, index) {
           bool isTheLastElement = (index == controller.moviesResultListFiltered.length);
           if (isTheLastElement) {
-            if (controller.thereAreMoreMovies()) {
+            if(!controller.isFiltering) {
+              if (controller.thereAreMoreMovies()) {
               return SpinKitThreeBounce(
                   size: SizeConfig.imageSizeMultiplier * 6,
                   color: Theme.of(context).accentColor);
             } else
               return Container();
+            } else {
+              return Container();
+            }
           } else {
             MovieResults movieResult = controller.moviesResultListFiltered[index];
             return MovieCard(

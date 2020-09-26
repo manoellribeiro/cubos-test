@@ -25,7 +25,8 @@ class _ListMoviesPageState
       bool isScrollAtEdge = scrollController.position.atEdge;
       bool isScrollNotOnTop = scrollController.position.pixels != 0.0;
       bool isScrollOnBottom = isScrollAtEdge && isScrollNotOnTop; 
-      if(isScrollOnBottom) {
+      bool shouldFetchMovies = isScrollOnBottom && !controller.isFiltering;
+      if(shouldFetchMovies) {
         controller.fetchMoreMovies();
       }
     });
@@ -50,7 +51,7 @@ class _ListMoviesPageState
                 children: [
                   Container(
                     color: Colors.white,
-                    height: SizeConfig.heightMultiplier * 27,
+                    height: SizeConfig.heightMultiplier * 25,
                     width: SizeConfig.widthMultiplier * 100,
                   ),
                   Expanded(
