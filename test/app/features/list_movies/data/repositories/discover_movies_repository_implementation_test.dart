@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cubos_test/app/core/errors/exceptions/cache_exception.dart';
 import 'package:cubos_test/app/core/errors/exceptions/server_exception.dart';
 import 'package:cubos_test/app/core/errors/failures/failure.dart';
-import 'package:cubos_test/app/core/errors/failures/server_failure.dart';
 import 'package:cubos_test/app/core/network/network_info.dart';
 import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_local_datasource/discover_movies_local_datasource.dart';
 import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_remote_datasource/discover_movies_remote_datasource.dart';
@@ -13,7 +12,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../../fixtures/fixture_reader.dart';
+import '../../../../../fixtures/discover_movies_api_response.dart';
+
 
 class DiscoverMovieRemoteDataSourceMock extends Mock
     implements DiscoverMoviesRemoteDataSource {}
@@ -63,11 +63,9 @@ void main() {
     final int testGenreId = 2;
     final int testPageNumber = 1;
 
-    final Map<String, dynamic> jsonMap =
-            json.decode(fixture('discover_movies_api_response.json'));
 
         final discoverMoviesApiResponse =
-            DiscoverMoviesApiResponse.fromJson(jsonMap);
+            DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
 
     test(
       'should check connectivity',

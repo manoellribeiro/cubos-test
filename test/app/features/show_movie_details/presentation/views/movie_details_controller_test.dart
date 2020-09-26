@@ -8,7 +8,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'dart:convert';
-import '../../../../../fixtures/fixture_reader.dart';
+
+import '../../../../../fixtures/movie_details.dart';
 
 class GetMovieDetailsMock extends Mock implements GetMovieDetails {}
 
@@ -41,10 +42,8 @@ void main() {
   });
 
   test('getDirectorsString returns the correct value', () {
-    final Map<String, dynamic> jsonMap =
-        json.decode(fixture('movie_details.json'));
-
-    final movieDetails = MovieDetails.fromJson(jsonMap);
+  
+    final movieDetails = MovieDetails.fromJson(MOVIE_DETAILS_JSON);
 
     expect(movieDetailsController.getDirectorsString(movieDetails.credits.crew), "David Fincher");
   });
@@ -59,15 +58,13 @@ void main() {
   });
 
   group("getMovieDetailsAction returns with success value", () {
+
+    final movieDetails = MovieDetails.fromJson(MOVIE_DETAILS_JSON);
+
     test(
       'set the value of movieDetails',
       () async {
         // arrange
-        final Map<String, dynamic> jsonMap =
-            json.decode(fixture('movie_details.json'));
-
-        final movieDetails = MovieDetails.fromJson(jsonMap);
-
         when(getMovieDetailsMock.call(any))
             .thenAnswer((_) async => Right(movieDetails));
         // act
@@ -80,12 +77,6 @@ void main() {
       'set the value of atualState to success',
       () async {
         // arrange
-        // arrange
-        final Map<String, dynamic> jsonMap =
-            json.decode(fixture('movie_details.json'));
-
-        final movieDetails = MovieDetails.fromJson(jsonMap);
-
         when(getMovieDetailsMock.call(any))
             .thenAnswer((_) async => Right(movieDetails));
         // act

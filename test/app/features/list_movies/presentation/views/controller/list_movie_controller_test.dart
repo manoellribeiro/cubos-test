@@ -1,16 +1,12 @@
-import 'package:cubos_test/app/core/errors/failures/failure.dart';
 import 'package:cubos_test/app/core/errors/failures/server_failure.dart';
 import 'package:cubos_test/app/core/utils/constants.dart';
-import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_local_datasource/discover_movies_local_datasource.dart';
-import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_remote_datasource/discover_movies_remote_datasource.dart';
 import 'package:cubos_test/app/features/list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
 import 'package:cubos_test/app/features/list_movies/domain/usecases/get_movies_results.dart';
 import 'package:cubos_test/app/features/list_movies/presentation/views/controller/list_movies_controller.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'dart:convert';
-import '../../../../../../fixtures/fixture_reader.dart';
+import '../../../../../../fixtures/discover_movies_api_response.dart';
 
 class GetMoviesResultsMock extends Mock implements GetMoviesResults {}
 
@@ -63,16 +59,14 @@ void main() {
   });
 
   group("getMoviesResultList returns with success value", () {
+    
+        final discoverMoviesApiResponse =
+            DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
+    
     test(
       'set the value of moviesResultList',
       () async {
         // arrange
-        final Map<String, dynamic> jsonMap =
-            json.decode(fixture('discover_movies_api_response.json'));
-
-        final discoverMoviesApiResponse =
-            DiscoverMoviesApiResponse.fromJson(jsonMap);
-
         when(mockGetMoviesResults.call(any, any))
             .thenAnswer((_) async => Right(discoverMoviesApiResponse));
         // act
@@ -87,12 +81,6 @@ void main() {
       'set the value of lastDiscoverMoviesApiResponse',
       () async {
         // arrange
-        final Map<String, dynamic> jsonMap =
-            json.decode(fixture('discover_movies_api_response.json'));
-
-        final discoverMoviesApiResponse =
-            DiscoverMoviesApiResponse.fromJson(jsonMap);
-
         when(mockGetMoviesResults.call(any, any))
             .thenAnswer((_) async => Right(discoverMoviesApiResponse));
         // act
@@ -107,12 +95,6 @@ void main() {
       'set the value of atualState to success',
       () async {
         // arrange
-        final Map<String, dynamic> jsonMap =
-            json.decode(fixture('discover_movies_api_response.json'));
-
-        final discoverMoviesApiResponse =
-            DiscoverMoviesApiResponse.fromJson(jsonMap);
-
         when(mockGetMoviesResults.call(any, any))
             .thenAnswer((_) async => Right(discoverMoviesApiResponse));
         // act
@@ -154,6 +136,10 @@ void main() {
   });
 
   group("Filter list", () {
+
+      final discoverMoviesApiResponse =
+          DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
+
     test("movieTitleFilter should initiate as a empty string", () {
       expect(listMoviesController.movieTitleFilter, "");
     });
@@ -165,12 +151,6 @@ void main() {
         "moviesResultListFiltered is equal to moviesResultList when movieTitleFilter is empty",
         () async {
       // arrange
-      final Map<String, dynamic> jsonMap =
-          json.decode(fixture('discover_movies_api_response.json'));
-
-      final discoverMoviesApiResponse =
-          DiscoverMoviesApiResponse.fromJson(jsonMap);
-
       when(mockGetMoviesResults.call(any, any))
           .thenAnswer((_) async => Right(discoverMoviesApiResponse));
       // act
@@ -184,12 +164,6 @@ void main() {
         "moviesResultListFiltered contains moviesResultsList value when movieTitleFilter is not empty",
         () async {
       // arrange
-      final Map<String, dynamic> jsonMap =
-          json.decode(fixture('discover_movies_api_response.json'));
-
-      final discoverMoviesApiResponse =
-          DiscoverMoviesApiResponse.fromJson(jsonMap);
-
       when(mockGetMoviesResults.call(any, any))
           .thenAnswer((_) async => Right(discoverMoviesApiResponse));
       // act
@@ -202,14 +176,12 @@ void main() {
   });
 
   group("Pagination", () {
-    test("thereAreMoreMovies returns the expected value", () async {
-      // arrange
-      final Map<String, dynamic> jsonMap =
-          json.decode(fixture('discover_movies_api_response.json'));
 
       final discoverMoviesApiResponse =
-          DiscoverMoviesApiResponse.fromJson(jsonMap);
+          DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
 
+    test("thereAreMoreMovies returns the expected value", () async {
+      // arrange
       when(mockGetMoviesResults.call(any, any))
           .thenAnswer((_) async => Right(discoverMoviesApiResponse));
       // act
@@ -219,12 +191,6 @@ void main() {
     });
     test("fetchMoreMovies add values to moviesResultList", () async {
       // arrange
-      final Map<String, dynamic> jsonMap =
-          json.decode(fixture('discover_movies_api_response.json'));
-
-      final discoverMoviesApiResponse =
-          DiscoverMoviesApiResponse.fromJson(jsonMap);
-
       when(mockGetMoviesResults.call(any, any))
           .thenAnswer((_) async => Right(discoverMoviesApiResponse));
       // act

@@ -1,4 +1,4 @@
-{
+const Map<String, dynamic> MOVIE_DETAILS_JSON = {
     "adult": false,
     "backdrop_path": "/rr7E0NoGKxvbkb89eR1GwfoYjpA.jpg",
     "belongs_to_collection": null,
@@ -2232,4 +2232,4 @@
         }
       ]
     }
-  }
+  };

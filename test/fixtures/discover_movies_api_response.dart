@@ -1,4 +1,4 @@
-{
+const Map<String, dynamic> DISCOVER_MOVIES_API_RESPONSE_JSON = {
     "page": 1,
     "results": [
       {
@@ -393,4 +393,4 @@
     ],
     "total_results": 61,
     "total_pages": 4
-  }
+  };

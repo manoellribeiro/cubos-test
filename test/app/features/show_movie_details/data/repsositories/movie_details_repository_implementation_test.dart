@@ -4,10 +4,6 @@ import 'package:cubos_test/app/core/errors/exceptions/cache_exception.dart';
 import 'package:cubos_test/app/core/errors/exceptions/server_exception.dart';
 import 'package:cubos_test/app/core/errors/failures/failure.dart';
 import 'package:cubos_test/app/core/network/network_info.dart';
-import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_local_datasource/discover_movies_local_datasource.dart';
-import 'package:cubos_test/app/features/list_movies/data/datasources/discover_movies_remote_datasource/discover_movies_remote_datasource.dart';
-import 'package:cubos_test/app/features/list_movies/data/repositories/discover_movies_repository_implementation.dart';
-import 'package:cubos_test/app/features/list_movies/domain/entities/DiscoverMoviesApiResponse.dart';
 import 'package:cubos_test/app/features/show_movie_details/data/datasources/movie_details_local_datasource/movie_details_local_datasource.dart';
 import 'package:cubos_test/app/features/show_movie_details/data/datasources/movie_details_remote_datasource/movie_details_remote_datasource.dart';
 import 'package:cubos_test/app/features/show_movie_details/data/repositories/movie_details_repository_implementation.dart';
@@ -16,7 +12,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../../fixtures/fixture_reader.dart';
+import '../../../../../fixtures/movie_details.dart';
+
 
 class MovieDetailsRemoteDataSourceMock extends Mock
     implements MovieDetailsRemoteDataSource {}
@@ -65,10 +62,7 @@ void main() {
   group("getMovieDetails", () {
     final int testMovieId = 123;
 
-    final Map<String, dynamic> jsonMap =
-        json.decode(fixture('movie_details.json'));
-
-    final movieDetails = MovieDetails.fromJson(jsonMap);
+    final movieDetails = MovieDetails.fromJson(MOVIE_DETAILS_JSON);
 
     test(
       'should check connectivity',
