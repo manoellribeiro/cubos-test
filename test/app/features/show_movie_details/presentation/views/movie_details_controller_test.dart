@@ -42,10 +42,10 @@ void main() {
   });
 
   test('getDirectorsString returns the correct value', () {
-  
     final movieDetails = MovieDetails.fromJson(MOVIE_DETAILS_JSON);
 
-    expect(movieDetailsController.getDirectorsString(movieDetails.credits.crew), "David Fincher");
+    expect(movieDetailsController.getDirectorsString(movieDetails.credits.crew),
+        "David Fincher");
   });
 
   test('getCastString returns the correct value', () {
@@ -58,7 +58,6 @@ void main() {
   });
 
   group("getMovieDetailsAction returns with success value", () {
-
     final movieDetails = MovieDetails.fromJson(MOVIE_DETAILS_JSON);
 
     test(

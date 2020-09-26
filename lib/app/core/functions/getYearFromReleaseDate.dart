@@ -1,3 +1,3 @@
-String getYearFromReleaseDate(String releaseDate){
+String getYearFromReleaseDate(String releaseDate) {
   return DateTime.parse(releaseDate).year.toString();
 }

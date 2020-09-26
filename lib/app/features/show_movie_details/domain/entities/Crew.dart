@@ -2,11 +2,10 @@ class Crew {
   String job;
   String name;
 
-  Crew(
-      {
-      this.job,
-      this.name,
-    });
+  Crew({
+    this.job,
+    this.name,
+  });
 
   Crew.fromJson(Map<dynamic, dynamic> json) {
     job = json['job'];

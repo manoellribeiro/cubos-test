@@ -1,14 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cubos_test/app/core/functions/getGenreNameById.dart';
-import 'package:cubos_test/app/features/list_movies/presentation/views/controller/list_movies_controller.dart';
-import 'package:cubos_test/app/features/list_movies/presentation/widgets/error_movie_card_widget.dart';
-import 'package:cubos_test/app/features/list_movies/presentation/widgets/successful_movie_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../../core/configs/size_config.dart';
 import '../../../../core/utils/constants.dart';
 import '../../domain/entities/MovieResults.dart';
+import '../views/controller/list_movies_controller.dart';
+import 'error_movie_card_widget.dart';
+import 'successful_movie_card_widget.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieResults movieResult;

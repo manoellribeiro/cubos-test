@@ -8,35 +8,35 @@ import 'package:mockito/mockito.dart';
 import '../../../../../json/discover_movies_api_response.dart';
 import '../../data/repositories/discover_movies_repository_implementation_test.dart';
 
-class DiscoverMoviesRepositoryMock extends Mock implements DiscoverMoviesRepository {}
+class DiscoverMoviesRepositoryMock extends Mock
+    implements DiscoverMoviesRepository {}
 
 void main() {
-  
   GetMoviesResultsImplementation usecase;
   DiscoverMoviesRepositoryMock repository;
 
   setUp(() {
     repository = DiscoverMoviesRepositoryMock();
-    usecase = GetMoviesResultsImplementation(discoverMoviesRepository: repository);
+    usecase =
+        GetMoviesResultsImplementation(discoverMoviesRepository: repository);
   });
 
   final int testGenreId = 12;
   final int testPageNumber = 1;
 
   final discoverMoviesApiResponse =
-            DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
+      DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
 
   test(
-    'should get movies results for the genreId and pageNumber from the repository',
-    () async {
-      when(repository.getMoviesList(any, any))
-            .thenAnswer((_) async => Right(discoverMoviesApiResponse));
+      'should get movies results for the genreId and pageNumber from the repository',
+      () async {
+    when(repository.getMoviesList(any, any))
+        .thenAnswer((_) async => Right(discoverMoviesApiResponse));
 
-      final result = await usecase.call(testGenreId, testPageNumber);
+    final result = await usecase.call(testGenreId, testPageNumber);
 
-      expect(result, Right(discoverMoviesApiResponse));
-      verify(repository.getMoviesList(testGenreId, testPageNumber));
-      verifyNoMoreInteractions(repository);
-    });
-
+    expect(result, Right(discoverMoviesApiResponse));
+    verify(repository.getMoviesList(testGenreId, testPageNumber));
+    verifyNoMoreInteractions(repository);
+  });
 }

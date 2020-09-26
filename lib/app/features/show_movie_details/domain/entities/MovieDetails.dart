@@ -17,22 +17,21 @@ class MovieDetails {
   double voteAverage;
   Credits credits;
 
-  MovieDetails(
-      {
-      this.id,
-      this.credits,
-      this.budget,
-      this.genres,
-      this.originalTitle,
-      this.overview,
-      this.popularity,
-      this.productionCompanies,
-      this.releaseDate,
-      this.revenue,
-      this.runtime,
-      this.title,
-      this.voteAverage,
-      });
+  MovieDetails({
+    this.id,
+    this.credits,
+    this.budget,
+    this.genres,
+    this.originalTitle,
+    this.overview,
+    this.popularity,
+    this.productionCompanies,
+    this.releaseDate,
+    this.revenue,
+    this.runtime,
+    this.title,
+    this.voteAverage,
+  });
 
   MovieDetails.fromJson(Map<dynamic, dynamic> json) {
     budget = json['budget'];

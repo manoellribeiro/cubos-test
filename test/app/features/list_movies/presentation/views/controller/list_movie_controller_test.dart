@@ -59,10 +59,9 @@ void main() {
   });
 
   group("getMoviesResultList returns with success value", () {
-    
-        final discoverMoviesApiResponse =
-            DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
-    
+    final discoverMoviesApiResponse =
+        DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
+
     test(
       'set the value of moviesResultList',
       () async {
@@ -136,9 +135,8 @@ void main() {
   });
 
   group("Filter list", () {
-
-      final discoverMoviesApiResponse =
-          DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
+    final discoverMoviesApiResponse =
+        DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
 
     test("movieTitleFilter should initiate as a empty string", () {
       expect(listMoviesController.movieTitleFilter, "");
@@ -176,9 +174,8 @@ void main() {
   });
 
   group("Pagination", () {
-
-      final discoverMoviesApiResponse =
-          DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
+    final discoverMoviesApiResponse =
+        DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
 
     test("thereAreMoreMovies returns the expected value", () async {
       // arrange

@@ -1,7 +1,5 @@
 import 'failure.dart';
 
 class ServerFailure extends Failure {
-  
-  ServerFailure({String message}): super(message: message);
-
+  ServerFailure({String message}) : super(message: message);
 }

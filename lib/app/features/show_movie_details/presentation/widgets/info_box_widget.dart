@@ -1,4 +1,3 @@
-import 'package:cubos_test/app/core/configs/size_config.dart';
 import 'package:flutter/material.dart';
 
 class InfoBox extends StatelessWidget {

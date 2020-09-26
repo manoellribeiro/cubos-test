@@ -14,7 +14,6 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../../json/movie_details.dart';
 
-
 class MovieDetailsRemoteDataSourceMock extends Mock
     implements MovieDetailsRemoteDataSource {}
 
@@ -77,76 +76,60 @@ void main() {
     );
 
     runTestsOnline(() {
-      test(
-        'repository returns remote data when successfull',
-        () async {
-        
-        when(remoteDataSourceMock.getMovieDetails(any)).thenAnswer((_) async => movieDetails);
-        
+      test('repository returns remote data when successfull', () async {
+        when(remoteDataSourceMock.getMovieDetails(any))
+            .thenAnswer((_) async => movieDetails);
+
         final result = await repository.getMovieDetails(testMovieId);
 
         verify(remoteDataSourceMock.getMovieDetails(testMovieId));
         expect(result, equals(Right(movieDetails)));
+      });
 
-        });
+      test('repository cache data when successfull', () async {
+        when(remoteDataSourceMock.getMovieDetails(any))
+            .thenAnswer((_) async => movieDetails);
 
-        test(
-        'repository cache data when successfull',
-        () async {
-        
-        when(remoteDataSourceMock.getMovieDetails(any)).thenAnswer((_) async => movieDetails);
-        
         await repository.getMovieDetails(testMovieId);
 
         verify(remoteDataSourceMock.getMovieDetails(testMovieId));
         verify(localDataSourceMock.storeMovieDetails(movieDetails));
+      });
 
-        });
+      test('repository returns server failure when unsuccessful', () async {
+        when(remoteDataSourceMock.getMovieDetails(any))
+            .thenThrow(ServerException());
 
-        test(
-        'repository returns server failure when unsuccessful',
-        () async {
-        
-        when(remoteDataSourceMock.getMovieDetails(any)).thenThrow(ServerException());
-        
         final result = await repository.getMovieDetails(testMovieId);
 
         verify(remoteDataSourceMock.getMovieDetails(testMovieId));
         verifyZeroInteractions(localDataSourceMock);
         expect(result, isA<Left<Failure, dynamic>>());
-
-        });
+      });
     });
-  
+
     runTestsOffline(() {
-      
-      test(
-        'repository returns last cached data',
-        () async {
-        
-        when(localDataSourceMock.getMovieDetails(any)).thenAnswer((_) async => movieDetails);
-        
+      test('repository returns last cached data', () async {
+        when(localDataSourceMock.getMovieDetails(any))
+            .thenAnswer((_) async => movieDetails);
+
         final result = await repository.getMovieDetails(testMovieId);
 
         verifyZeroInteractions(remoteDataSourceMock);
         verify(localDataSourceMock.getMovieDetails(testMovieId));
         expect(result, equals(Right(movieDetails)));
+      });
 
-        });
+      test('repository returns cache failure when unsuccessful', () async {
+        when(localDataSourceMock.getMovieDetails(any))
+            .thenThrow(CacheException());
 
-        test(
-        'repository returns cache failure when unsuccessful',
-        () async {
-        
-        when(localDataSourceMock.getMovieDetails(any)).thenThrow(CacheException());
-        
         final result = await repository.getMovieDetails(testMovieId);
 
         verify(localDataSourceMock.getMovieDetails(testMovieId));
         verifyZeroInteractions(remoteDataSourceMock);
         expect(result, isA<Left<Failure, dynamic>>());
-
-        });
+      });
     });
   });
 }

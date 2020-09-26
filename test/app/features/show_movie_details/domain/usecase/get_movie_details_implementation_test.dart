@@ -7,10 +7,10 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../../json/movie_details.dart';
 
-class MovieDetailsRepositoryMock extends Mock implements MovieDetailsRepository {}
+class MovieDetailsRepositoryMock extends Mock
+    implements MovieDetailsRepository {}
 
 void main() {
-  
   GetMovieDetailsImplementation usecase;
   MovieDetailsRepositoryMock repository;
 
@@ -22,17 +22,16 @@ void main() {
   final int testMovieId = 7;
 
   final movieDetails = MovieDetails.fromJson(MOVIE_DETAILS_JSON);
-  
-  test(
-    'should get movie details for the movieId from the repository',
-    () async {
-      when(repository.getMovieDetails(any))
-            .thenAnswer((_) async => Right(movieDetails));
 
-      final result = await usecase.call(testMovieId);
+  test('should get movie details for the movieId from the repository',
+      () async {
+    when(repository.getMovieDetails(any))
+        .thenAnswer((_) async => Right(movieDetails));
 
-      expect(result, Right(movieDetails));
-      verify(repository.getMovieDetails(testMovieId));
-      verifyNoMoreInteractions(repository);
-    });
+    final result = await usecase.call(testMovieId);
+
+    expect(result, Right(movieDetails));
+    verify(repository.getMovieDetails(testMovieId));
+    verifyNoMoreInteractions(repository);
+  });
 }

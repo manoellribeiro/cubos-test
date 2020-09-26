@@ -14,7 +14,6 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../../json/discover_movies_api_response.dart';
 
-
 class DiscoverMovieRemoteDataSourceMock extends Mock
     implements DiscoverMoviesRemoteDataSource {}
 
@@ -63,9 +62,8 @@ void main() {
     final int testGenreId = 2;
     final int testPageNumber = 1;
 
-
-        final discoverMoviesApiResponse =
-            DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
+    final discoverMoviesApiResponse =
+        DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
 
     test(
       'should check connectivity',
@@ -80,76 +78,67 @@ void main() {
     );
 
     runTestsOnline(() {
-      test(
-        'repository returns remote data when successfull',
-        () async {
-        
-        when(remoteDataSourceMock.getMoviesList(any, any)).thenAnswer((_) async => discoverMoviesApiResponse);
-        
-        final result = await repository.getMoviesList(testGenreId, testPageNumber);
+      test('repository returns remote data when successfull', () async {
+        when(remoteDataSourceMock.getMoviesList(any, any))
+            .thenAnswer((_) async => discoverMoviesApiResponse);
+
+        final result =
+            await repository.getMoviesList(testGenreId, testPageNumber);
 
         verify(remoteDataSourceMock.getMoviesList(testGenreId, testPageNumber));
         expect(result, equals(Right(discoverMoviesApiResponse)));
+      });
 
-        });
+      test('repository cache data when successfull', () async {
+        when(remoteDataSourceMock.getMoviesList(any, any))
+            .thenAnswer((_) async => discoverMoviesApiResponse);
 
-        test(
-        'repository cache data when successfull',
-        () async {
-        
-        when(remoteDataSourceMock.getMoviesList(any, any)).thenAnswer((_) async => discoverMoviesApiResponse);
-        
         await repository.getMoviesList(testGenreId, testPageNumber);
 
         verify(remoteDataSourceMock.getMoviesList(testGenreId, testPageNumber));
-        verify(localDataSourceMock.storeLastDiscoverMoviesApiResponse(discoverMoviesApiResponse, testGenreId));
+        verify(localDataSourceMock.storeLastDiscoverMoviesApiResponse(
+            discoverMoviesApiResponse, testGenreId));
+      });
 
-        });
+      test('repository returns server failure when unsuccessful', () async {
+        when(remoteDataSourceMock.getMoviesList(any, any))
+            .thenThrow(ServerException());
 
-        test(
-        'repository returns server failure when unsuccessful',
-        () async {
-        
-        when(remoteDataSourceMock.getMoviesList(any, any)).thenThrow(ServerException());
-        
-        final result = await repository.getMoviesList(testGenreId, testPageNumber);
+        final result =
+            await repository.getMoviesList(testGenreId, testPageNumber);
 
         verify(remoteDataSourceMock.getMoviesList(testGenreId, testPageNumber));
         verifyZeroInteractions(localDataSourceMock);
         expect(result, isA<Left<Failure, dynamic>>());
-
-        });
+      });
     });
-  
+
     runTestsOffline(() {
-      
-      test(
-        'repository returns last cached data',
-        () async {
-        
-        when(localDataSourceMock.getLastDiscoverMoviesApiResponse(any)).thenAnswer((_) async => discoverMoviesApiResponse);
-        
-        final result = await repository.getMoviesList(testGenreId, testPageNumber);
+      test('repository returns last cached data', () async {
+        when(localDataSourceMock.getLastDiscoverMoviesApiResponse(any))
+            .thenAnswer((_) async => discoverMoviesApiResponse);
+
+        final result =
+            await repository.getMoviesList(testGenreId, testPageNumber);
 
         verifyZeroInteractions(remoteDataSourceMock);
-        verify(localDataSourceMock.getLastDiscoverMoviesApiResponse(testGenreId));
+        verify(
+            localDataSourceMock.getLastDiscoverMoviesApiResponse(testGenreId));
         expect(result, equals(Right(discoverMoviesApiResponse)));
+      });
 
-        });
+      test('repository returns cache failure when unsuccessful', () async {
+        when(localDataSourceMock.getLastDiscoverMoviesApiResponse(any))
+            .thenThrow(CacheException());
 
-        test(
-        'repository returns cache failure when unsuccessful',
-        () async {
-        
-        when(localDataSourceMock.getLastDiscoverMoviesApiResponse(any)).thenThrow(CacheException());
-        
-        final result = await repository.getMoviesList(testGenreId, testPageNumber);
+        final result =
+            await repository.getMoviesList(testGenreId, testPageNumber);
 
-        verify(localDataSourceMock.getLastDiscoverMoviesApiResponse(testGenreId));
+        verify(
+            localDataSourceMock.getLastDiscoverMoviesApiResponse(testGenreId));
         verifyZeroInteractions(remoteDataSourceMock);
         expect(result, isA<Left<Failure, dynamic>>());
-
-        });
+      });
     });
   });
 }

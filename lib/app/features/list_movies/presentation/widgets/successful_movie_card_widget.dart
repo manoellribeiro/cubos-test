@@ -1,9 +1,10 @@
-import 'package:cubos_test/app/core/configs/size_config.dart';
-import 'package:cubos_test/app/core/utils/constants.dart';
-import 'package:cubos_test/app/features/list_movies/domain/entities/MovieResults.dart';
-import 'package:cubos_test/app/features/list_movies/presentation/views/controller/list_movies_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../../../core/configs/size_config.dart';
+import '../../../../core/utils/constants.dart';
+import '../../domain/entities/MovieResults.dart';
+import '../views/controller/list_movies_controller.dart';
 
 class SuccessfulMovieCard extends StatelessWidget {
   final MovieResults movieResult;

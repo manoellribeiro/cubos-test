@@ -1,3 +1,4 @@
+import '../../../../core/configs/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,22 +17,21 @@ class ListMoviesPage extends StatefulWidget {
 
 class _ListMoviesPageState
     extends ModularState<ListMoviesPage, ListMoviesController> {
-  
   ScrollController scrollController;
-  
+
   @override
   void initState() {
-    scrollController = ScrollController()..addListener(() {
-      bool isScrollAtEdge = scrollController.position.atEdge;
-      bool isScrollNotOnTop = scrollController.position.pixels != 0.0;
-      bool isScrollOnBottom = isScrollAtEdge && isScrollNotOnTop; 
-      bool shouldFetchMovies = isScrollOnBottom && !controller.isFiltering;
-      if(shouldFetchMovies) {
-        controller.fetchMoreMovies();
-      }
-    });
-    controller
-        .getMoviesResultList(ACTION_GENRE_ID, 1);
+    scrollController = ScrollController()
+      ..addListener(() {
+        bool isScrollAtEdge = scrollController.position.atEdge;
+        bool isScrollNotOnTop = scrollController.position.pixels != 0.0;
+        bool isScrollOnBottom = isScrollAtEdge && isScrollNotOnTop;
+        bool shouldFetchMovies = isScrollOnBottom && !controller.isFiltering;
+        if (shouldFetchMovies) {
+          controller.fetchMoreMovies();
+        }
+      });
+    controller.getMoviesResultList(ACTION_GENRE_ID, 1);
     super.initState();
   }
 
@@ -62,7 +62,12 @@ class _ListMoviesPageState
                         return MoviesListView(
                           scrollController: scrollController,
                         );
-                      if (controller.checkForState(ListPageStates.failure)) return Center(child: Text(controller.failure.message, style: TextStyle(color: Colors.black),));
+                      if (controller.checkForState(ListPageStates.failure))
+                        return Center(
+                            child: Text(
+                          controller.failure.message,
+                          style: TextStyle(color: Colors.black),
+                        ));
                       return Container(child: Center(child: Text("Failure")));
                     }),
                   )
@@ -99,7 +104,7 @@ class _ListMoviesPageState
                         height: SizeConfig.heightMultiplier * 7,
                       ),
                       Text(
-                        "Filmes",
+                        Strings.movies,
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       SizedBox(
@@ -107,7 +112,7 @@ class _ListMoviesPageState
                       ),
                       RoundedSearchTextField(
                         onChanged: controller.setFilter,
-                        labelText: "Pesquise filmes",
+                        labelText: Strings.moviesSearch,
                         prefixIcon: Icons.search,
                         textInputType: TextInputType.text,
                         obscureText: false,
@@ -122,34 +127,38 @@ class _ListMoviesPageState
                             GenreTabBar(
                               onTap: () {
                                 controller.setSelectedTabBarIndex(0);
-                                controller.getMoviesResultList(ACTION_GENRE_ID, 1);
-                                },
+                                controller.getMoviesResultList(
+                                    ACTION_GENRE_ID, 1);
+                              },
                               isSelect: controller.isSelect(0),
-                              genreName: "Ação",
+                              genreName: Strings.action,
                             ),
                             GenreTabBar(
-                                onTap: (){
-                                  controller.setSelectedTabBarIndex(1);
-                                  controller.getMoviesResultList(ADVENTURE_GENRE_ID, 1);
-                                  },
-                                isSelect: controller.isSelect(1),
-                                genreName: "Aventura",
-                              ),
+                              onTap: () {
+                                controller.setSelectedTabBarIndex(1);
+                                controller.getMoviesResultList(
+                                    ADVENTURE_GENRE_ID, 1);
+                              },
+                              isSelect: controller.isSelect(1),
+                              genreName: Strings.adventure,
+                            ),
                             GenreTabBar(
-                              onTap: (){
+                              onTap: () {
                                 controller.setSelectedTabBarIndex(2);
-                                controller.getMoviesResultList(FANTASY_GENRE_ID, 1);  
+                                controller.getMoviesResultList(
+                                    FANTASY_GENRE_ID, 1);
                               },
                               isSelect: controller.isSelect(2),
-                              genreName: "Fantasia",
+                              genreName: Strings.fantasy,
                             ),
                             GenreTabBar(
-                              onTap: (){
+                              onTap: () {
                                 controller.setSelectedTabBarIndex(3);
-                                controller.getMoviesResultList(COMEDY_GENRE_ID, 1);
-                                },
+                                controller.getMoviesResultList(
+                                    COMEDY_GENRE_ID, 1);
+                              },
                               isSelect: controller.isSelect(3),
-                              genreName: "Comédia",
+                              genreName: Strings.comedy,
                             ),
                           ],
                         );
