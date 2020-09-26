@@ -55,7 +55,6 @@ class _ListMoviesPageState
                     width: SizeConfig.widthMultiplier * 100,
                   ),
                   Expanded(
-                    flex: 1,
                     child: Observer(builder: (_) {
                       if (controller.checkForState(ListPageStates.loading))
                         return Center(child: CircularProgressIndicator());
