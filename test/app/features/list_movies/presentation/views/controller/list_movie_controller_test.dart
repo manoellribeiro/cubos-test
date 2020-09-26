@@ -177,6 +177,11 @@ void main() {
     final discoverMoviesApiResponse =
         DiscoverMoviesApiResponse.fromJson(DISCOVER_MOVIES_API_RESPONSE_JSON);
 
+    test('isFiltering returns the correct value',() {
+      listMoviesController.setFilter("sdasd");
+      expect(listMoviesController.isFiltering, true);
+    });
+
     test("thereAreMoreMovies returns the expected value", () async {
       // arrange
       when(mockGetMoviesResults.call(any, any))
